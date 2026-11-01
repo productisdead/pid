@@ -1,0 +1,184 @@
+---
+import Base from '@/layouts/Base.astro';
+import Icon from '@/components/Icon.astro';
+import Newsletter from '@/components/Newsletter.astro';
+import { SITE } from '@/site.config';
+
+const theses = [
+  {
+    h: 'The artifacts are dead.',
+    p: 'PRDs, roadmaps, status updates, user-story templates. AI makes them in seconds, so they are worth roughly nothing. Good riddance. They were always a stand-in for thinking, never the thinking itself.',
+    tone: 'tone-yellow', tag: 'rip, PRDs', anim: 'a-doc',
+    svg: '<path class="draw" pathLength="1" d="M6 3h8l4 4v14H6z"/><path class="draw" pathLength="1" d="M14 3v4h4"/><path class="draw d2" pathLength="1" d="M9 11h6M9 14h6M9 17h3"/><path class="slash" pathLength="1" d="M3.5 20.5 20.5 3.5"/>',
+  },
+  {
+    h: 'The job is not.',
+    p: 'Deciding what matters, for whom, and why now. Saying no to a hundred good ideas. Being accountable when the bet doesn\'t pay off. No model will take the blame for you, so no model will take the job.',
+    tone: 'tone-ink', tag: 'still breathing', anim: 'a-pulse',
+    svg: '<path class="track" d="M2 12h4.5l2-5 4 10 2.5-7 1.5 2H22"/><path class="beat" pathLength="1" d="M2 12h4.5l2-5 4 10 2.5-7 1.5 2H22"/>',
+  },
+  {
+    h: 'Speed made judgment more valuable, not less.',
+    p: 'When building costs almost nothing, the bottleneck moves to knowing what to build. Teams that ship ten times faster in the wrong direction just arrive at the wrong place sooner.',
+    tone: 'tone-orange', tag: 'aim first', anim: 'a-compass',
+    svg: '<circle class="draw" pathLength="1" cx="12" cy="12" r="9"/><path class="tick" pathLength="1" d="M12 3.5v1.5M12 19v1.5M3.5 12H5M19 12h1.5"/><g class="needle"><path d="m12 6 2.2 6h-4.4z" class="n-n"/><path d="m12 18-2.2-6h4.4z"/></g>',
+  },
+  {
+    h: 'Taste is your advantage.',
+    p: 'Everyone has the same models. What they don\'t have is your customer context, your scar tissue, and your opinion about what "good" looks like. Encode it, and agents amplify it. Skip it, and they amplify mediocrity.',
+    tone: 'tone-pink', tag: 'your edge', anim: 'a-gem',
+    svg: '<path class="draw" pathLength="1" d="M6.5 5h11L21 10l-9 10-9-10z"/><path class="draw d2" pathLength="1" d="M3 10h18M12 20 8.5 10l2-5M12 20l3.5-10-2-5"/><path class="spark s1" d="M20 1.5v3M18.5 3h3"/><path class="spark s2" d="M3 16.5v2.5M1.75 17.75h2.5"/>',
+  },
+  {
+    h: 'So: automate the busywork, keep the opinions.',
+    p: 'That\'s what the skills hub is for. Each skill is a small piece of product judgment, written down so an agent can apply it. You stay the editor-in-chief.',
+    tone: 'tone-lime', tag: 'the deal', anim: 'a-gear',
+    svg: '<g class="gear"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/><circle cx="12" cy="12" r="6.5"/></g>',
+  },
+];
+---
+<Base title="Manifesto" description="Product is dead. Long live product. Why AI makes product judgment more valuable, not less.">
+  <section class="container-x pt-12 sm:pt-20">
+    <div class="grid items-end gap-10 lg:grid-cols-[1.4fr_1fr]">
+      <div>
+        <p data-reveal class="eyebrow">Manifesto</p>
+        <h1 class="mt-4 font-display text-[clamp(3rem,8vw,6.5rem)] font-extrabold leading-[0.92] tracking-[-0.045em]">
+          <span data-reveal style="--d:1" class="block">Not dead.</span>
+          <span data-reveal style="--d:2" class="block text-muted">Just resting.</span>
+        </h1>
+      </div>
+      <p data-reveal style="--d:3" class="text-lg leading-relaxed text-ink-2">
+        <span class="hand block text-2xl text-ink">hi, I'm {SITE.author.name}.</span>
+        I've watched "product is dead" trend roughly every eighteen months for a decade. This time the headline comes with a demo, so it feels true.
+        This site is my long-form argument that it isn't. It's built from the cynical take and back.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-x mt-20">
+    <ol class="theses border-t border-line">
+      {theses.map((t, i) => (
+        <li data-reveal class={`thesis ${t.anim} group grid gap-5 border-b border-line py-10 sm:grid-cols-[7rem_1fr_1.2fr] sm:gap-8`}>
+          <div class="flex items-center gap-4 sm:flex-col sm:items-start sm:gap-3">
+            <span class:list={['tile', t.tone]} aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={t.svg} />
+            </span>
+            <span class="hand text-lg leading-none text-muted">{t.tag}</span>
+            <span class="sr-only">Point {i + 1}</span>
+          </div>
+          <h2 class="font-display text-3xl font-bold leading-tight tracking-tight">{t.h}</h2>
+          <p class="text-lg leading-relaxed text-ink-2">{t.p}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="container-x mt-24 grid gap-6 sm:grid-cols-2">
+    <a data-reveal href="/writing" class="card group relative overflow-hidden p-8 transition-colors hover:border-line-strong">
+      <span class="text-3xl">✎</span>
+      <h3 class="mt-4 font-display text-2xl font-bold tracking-tight">Read the essays</h3>
+      <p class="mt-2 text-ink-2">Hot takes, rebuttals and field notes. Pick a side.</p>
+      <Icon name="arrow" class="absolute right-8 top-8 transition-transform group-hover:translate-x-1" />
+    </a>
+    <a data-reveal style="--d:1" href="/skills" class="card group relative overflow-hidden p-8 transition-colors hover:border-line-strong">
+      <span class="text-3xl">✦</span>
+      <h3 class="mt-4 font-display text-2xl font-bold tracking-tight">Steal the skills</h3>
+      <p class="mt-2 text-ink-2">Product judgment as files. Free, and yours to fork.</p>
+      <Icon name="arrow" class="absolute right-8 top-8 transition-transform group-hover:translate-x-1" />
+    </a>
+  </section>
+
+  <div class="container-x mt-24"><Newsletter /></div>
+</Base>
+
+<style>
+  /* ---------- Thesis tiles ---------- */
+  .tile {
+    display: grid; place-items: center;
+    width: 4.5rem; height: 4.5rem; flex: none;
+    border-radius: 1.1rem;
+    background: var(--tone); color: var(--tone-ink);
+    border: 1.5px solid var(--ink);
+    box-shadow: 0 0 0 0 var(--ink);
+    transform: rotate(-4deg);
+    transition: transform 0.45s var(--ease-spring), box-shadow 0.3s var(--ease-out-expo);
+  }
+  .thesis:nth-child(even) .tile { transform: rotate(3deg); }
+  .thesis:hover .tile { transform: translate(-3px, -3px) rotate(0deg); box-shadow: 5px 5px 0 0 var(--ink); }
+  .tone-ink.tile { color: var(--yellow); }
+  .tile :global(svg) { overflow: visible; width: 2.6rem; height: 2.6rem; }
+
+  /* Default (no-motion / no-JS) state: everything visible, static. */
+  .tile :global(.slash) { stroke: var(--red); stroke-width: 2.4; }
+  .tile :global(.track) { opacity: 0.25; }
+  .tile :global(.needle) { transform-origin: 12px 12px; transform: rotate(35deg); fill: currentColor; stroke: none; }
+  .tile :global(.n-n) { fill: var(--red); }
+  .tile :global(.gear) { transform-origin: 12px 12px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.js .thesis .tile {
+      transform: scale(0.6) rotate(-14deg); opacity: 0;
+      transition: transform 0.7s var(--ease-spring) 0.1s, opacity 0.4s ease 0.1s, box-shadow 0.3s var(--ease-out-expo);
+    }
+    html.js .thesis.is-visible .tile { transform: rotate(-4deg); opacity: 1; }
+    html.js .thesis.is-visible:nth-child(even) .tile { transform: rotate(3deg); }
+    html.js .thesis.is-visible:hover .tile { transform: translate(-3px, -3px) rotate(0deg); }
+
+    /* Line-drawing on reveal */
+    html.js .thesis .tile :global(.draw),
+    html.js .thesis .tile :global(.slash),
+    html.js .thesis .tile :global(.tick) {
+      stroke-dasharray: 1; stroke-dashoffset: 1;
+      transition: stroke-dashoffset 0.9s var(--ease-out-expo) 0.35s;
+    }
+    html.js .thesis .tile :global(.d2) { transition-delay: 0.6s; }
+    html.js .thesis .tile :global(.tick) { transition-delay: 0.7s; }
+    html.js .thesis .tile :global(.slash) { transition: stroke-dashoffset 0.35s cubic-bezier(.7,0,.3,1) 1.15s; }
+    html.js .thesis.is-visible .tile :global(:is(.draw, .slash, .tick)) { stroke-dashoffset: 0; }
+
+    /* 1 · doc gets crossed out, shudders on hover */
+    .a-doc:hover .tile :global(svg) { animation: shudder 0.4s ease-in-out; }
+
+    /* 2 · heartbeat that never stops */
+    html.js .a-pulse .tile :global(.beat) { stroke-dasharray: 0.28 0.72; stroke-dashoffset: 1; }
+    html.js .a-pulse.is-visible .tile :global(.beat) { animation: beat 1.8s linear infinite 0.6s; }
+    .a-pulse:hover .tile :global(.beat) { animation-duration: 0.9s !important; }
+
+    /* 3 · compass searches, then settles on north */
+    html.js .a-compass .tile :global(.needle) { transform: rotate(-120deg); }
+    html.js .a-compass.is-visible .tile :global(.needle) { animation: seek 1.6s var(--ease-out-expo) 0.5s forwards; }
+    .a-compass:hover .tile :global(.needle) { animation: seek-hover 0.9s var(--ease-spring) forwards !important; }
+
+    /* 4 · gem draws, sparkles twinkle */
+    .a-gem .tile :global(.spark) { transform-box: fill-box; transform-origin: center; animation: twinkle 2.4s ease-in-out infinite; }
+    .a-gem .tile :global(.s2) { animation-delay: 1.2s; }
+
+    /* 5 · the machine does the busywork */
+    html.js .a-gear.is-visible .tile :global(.gear) { animation: spin 9s linear infinite; }
+    .a-gear:hover .tile :global(.gear) { animation-duration: 1.6s !important; }
+  }
+
+  @keyframes beat { to { stroke-dashoffset: 0; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes seek {
+    0% { transform: rotate(-120deg); }
+    40% { transform: rotate(70deg); }
+    65% { transform: rotate(-25deg); }
+    85% { transform: rotate(8deg); }
+    100% { transform: rotate(0deg); }
+  }
+  @keyframes seek-hover {
+    0% { transform: rotate(0deg); }
+    35% { transform: rotate(-40deg); }
+    100% { transform: rotate(0deg); }
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.6) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.15) rotate(45deg); }
+  }
+  @keyframes shudder {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px) rotate(-3deg); }
+    75% { transform: translateX(2px) rotate(3deg); }
+  }
+</style>

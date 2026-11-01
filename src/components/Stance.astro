@@ -1,0 +1,10 @@
+---
+import { STANCE } from '@/lib/content';
+interface Props { stance: keyof typeof STANCE; class?: string }
+const { stance, class: cls = '' } = Astro.props;
+const s = STANCE[stance];
+const tone = { 'hot-take': 'bg-ink text-paper', rebuttal: 'bg-yellow text-brand-ink', notes: 'bg-paper-2 text-ink-2 border border-line' }[stance];
+---
+<span class:list={['inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 font-mono text-[0.68rem] font-semibold uppercase tracking-wider', tone, cls]} title={s.hint}>
+  <span aria-hidden="true">{s.glyph}</span>{s.label}
+</span>

@@ -1,0 +1,33 @@
+---
+import { SITE } from '@/site.config';
+import Icon from './Icon.astro';
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+const { action, fieldName } = SITE.newsletter;
+---
+<section data-reveal class:list={['relative overflow-hidden rounded-3xl bg-yellow text-brand-ink', compact ? 'p-7 sm:p-9' : 'p-8 sm:p-12 lg:p-14']}>
+  <div class="dots pointer-events-none absolute inset-0 opacity-40 [--line-strong:rgb(20_17_18/0.18)]"></div>
+  <div class="relative grid items-center gap-8 lg:grid-cols-[1.4fr_1fr]">
+    <div>
+      <p class="hand text-2xl">psst. the funeral's been postponed.</p>
+      <h2 class:list={['mt-2 font-display font-bold tracking-tight', compact ? 'text-3xl' : 'text-4xl sm:text-5xl']}>
+        Get the essays before the hype cycle does.
+      </h2>
+      <p class="mt-4 max-w-lg text-[1.05rem] text-black/70">
+        New essays and new skills, when they're ready. No growth hacks, no "10 prompts that will replace your PM". Unsubscribe whenever you like.
+      </p>
+      {action ? (
+        <form action={action} method="post" target="_blank" class="mt-7 flex max-w-md flex-col gap-2 sm:flex-row">
+          <label class="sr-only" for={`nl-${compact ? 'c' : 'f'}`}>Email address</label>
+          <input id={`nl-${compact ? 'c' : 'f'}`} name={fieldName} type="email" required placeholder="you@stillemployed.com" autocomplete="email" class="h-12 flex-1 rounded-full border-2 border-black/80 bg-white/80 px-5 text-base text-black outline-none placeholder:text-black/40 focus:bg-white" />
+          <button class="btn h-12 bg-[#141112] px-6 text-[#F5F5F5] hover:shadow-[4px_4px_0_0_#fff] hover:-translate-x-0.5 hover:-translate-y-0.5">Subscribe</button>
+        </form>
+      ) : (
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="/rss.xml" class="btn h-12 bg-[#141112] px-6 text-[#F5F5F5] hover:shadow-[4px_4px_0_0_#fff] hover:-translate-x-0.5 hover:-translate-y-0.5"><Icon name="rss" size={16} /> Follow via RSS</a>
+        </div>
+      )}
+    </div>
+    <img src="/brand/cat.svg" alt="" width="363" height="316" loading="lazy" class="mx-auto hidden w-full max-w-xs -rotate-3 lg:block" />
+  </div>
+</section>

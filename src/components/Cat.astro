@@ -1,0 +1,33 @@
+---
+/** The brand cat, lounging on a sun. Breathes, snores, and has opinions. */
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<div class:list={['cat-stage relative', cls]} aria-hidden="false">
+  <div class="sun absolute inset-[6%_4%_2%_10%] rounded-full bg-yellow"></div>
+  <div class="absolute inset-[6%_4%_2%_10%] rounded-full dots opacity-60 [mask-image:radial-gradient(circle,black,transparent_70%)]"></div>
+  <img
+    src="/brand/cat.svg"
+    alt="The productisdead mascot: a fat cat in sunglasses, lounging, very much not dead."
+    width="363" height="316"
+    fetchpriority="high"
+    class="cat relative w-full origin-[45%_95%] drop-shadow-[0_24px_24px_rgba(20,17,18,0.15)]"
+  />
+  <div class="zzz pointer-events-none absolute left-[46%] top-[6%] font-hand text-ink" aria-hidden="true">
+    <span class="absolute text-2xl [animation:float_3.6s_ease-in-out_infinite]">z</span>
+    <span class="absolute left-3 text-3xl [animation:float_3.6s_ease-in-out_1.2s_infinite] opacity-0">z</span>
+    <span class="absolute left-6 text-4xl [animation:float_3.6s_ease-in-out_2.4s_infinite] opacity-0">Z</span>
+  </div>
+  <p class="note hand absolute -bottom-2 right-[2%] rotate-[-4deg] text-2xl text-ink-2 sm:text-3xl">
+    <svg class="absolute -left-14 -top-9 w-14 text-ink-2" viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M56 34 C 40 34, 20 26, 8 8" /><path d="M8 8 L 9 19 M8 8 L 18 12" /></svg>
+    not dead. just resting.
+  </p>
+</div>
+<style>
+  .sun { animation: sun-in 1.2s var(--ease-out-expo) both; }
+  .cat { animation: cat-in 1.1s var(--ease-spring) 0.15s both, breathe 4.5s ease-in-out 1.3s infinite; }
+  .note { animation: fade-up 0.8s var(--ease-out-expo) 1.1s both; }
+  @keyframes sun-in { from { transform: scale(0.6); opacity: 0; } }
+  @keyframes cat-in { from { transform: translateY(30px) rotate(-6deg) scale(0.92); opacity: 0; } }
+  @keyframes fade-up { from { transform: translateY(10px) rotate(-4deg); opacity: 0; } }
+</style>
