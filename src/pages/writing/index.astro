@@ -1,0 +1,33 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import PostRow from '@/components/PostRow.astro';
+import Newsletter from '@/components/Newsletter.astro';
+import { getPosts, slugify, uniqueSorted, STANCE } from '@/lib/content';
+
+const posts = await getPosts();
+const tags = uniqueSorted(posts.flatMap((p) => p.data.tags));
+const counts = Object.fromEntries(
+  (Object.keys(STANCE) as (keyof typeof STANCE)[]).map((k) => [k, posts.filter((p) => p.data.stance === k).length]),
+);
+---
+<Base title="Writing" description="Essays on why AI didn't kill product management — hot takes, rebuttals, and field notes.">
+  <PageHeader eyebrow={`Writing · ${posts.length} essays`} title="Hot takes, rebuttals & field notes." hand="(mostly rebuttals)">
+    <div class="flex flex-wrap gap-2">
+      <a href="/writing" class="chip" aria-current="page">All</a>
+      {tags.map((t) => <a href={`/writing/tag/${slugify(t)}`} class="chip">#{t}</a>)}
+    </div>
+    <dl class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted">
+      {(Object.entries(STANCE) as [keyof typeof STANCE, (typeof STANCE)[keyof typeof STANCE]][]).map(([k, s]) => (
+        <div class="flex items-center gap-2"><dt>{s.glyph} {s.label}</dt><dd class="font-mono text-xs">({counts[k]})</dd><dd class="hidden sm:block">— {s.hint.toLowerCase()}</dd></div>
+      ))}
+    </dl>
+  </PageHeader>
+  <section class="container-x">
+    <ul class="border-t border-line">
+      {posts.map((post, i) => <PostRow post={post} index={i} />)}
+    </ul>
+    {posts.length === 0 && <p class="hand py-20 text-center text-3xl text-muted">Nothing yet. The cat is thinking.</p>}
+  </section>
+  <div class="container-x mt-24"><Newsletter compact /></div>
+</Base>

@@ -1,0 +1,52 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { NAV } from '@/site.config';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => path === href || path.startsWith(href + '/');
+---
+<header data-header class="group/header sticky top-0 z-40 border-b border-transparent transition-[background-color,border-color,backdrop-filter] duration-300 data-[scrolled]:border-line data-[scrolled]:bg-paper/80 data-[scrolled]:backdrop-blur-xl">
+  <div class="container-x flex h-16 items-center justify-between gap-4">
+    <Logo />
+    <nav aria-label="Main" class="hidden items-center gap-1 md:flex">
+      {NAV.map((item) => (
+        <a
+          href={item.href}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+          class="relative rounded-full px-3.5 py-2 text-sm font-medium text-ink-2 transition-colors hover:text-ink aria-[current=page]:text-ink"
+        >
+          {item.label}
+          {isActive(item.href) && <span class="absolute inset-x-3.5 -bottom-0.5 h-[3px] rounded-full bg-yellow" transition:name="nav-indicator" />}
+        </a>
+      ))}
+    </nav>
+    <div class="flex items-center gap-1.5">
+      <button type="button" data-search-open class="hidden h-9 items-center gap-2 rounded-full border border-line bg-card pl-3 pr-1.5 text-sm text-muted transition-colors hover:border-line-strong sm:inline-flex" aria-label="Search (⌘K)">
+        <Icon name="search" size={15} />
+        <span class="pr-6">Search</span>
+        <kbd class="kbd">⌘K</kbd>
+      </button>
+      <button type="button" data-search-open class="grid size-9 place-items-center rounded-full text-ink-2 hover:bg-paper-2 sm:hidden" aria-label="Search">
+        <Icon name="search" />
+      </button>
+      <button type="button" data-theme-toggle class="grid size-9 place-items-center rounded-full text-ink-2 transition-colors hover:bg-paper-2 hover:text-ink" aria-label="Toggle dark mode">
+        <Icon name="moon" class="dark:hidden" />
+        <Icon name="sun" class="hidden dark:block" />
+      </button>
+      <button type="button" data-menu-button aria-expanded="false" aria-controls="mobile-menu" class="grid size-9 place-items-center rounded-full text-ink-2 hover:bg-paper-2 md:hidden" aria-label="Menu">
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-menu" data-menu aria-label="Mobile" class="grid grid-rows-[0fr] border-line bg-paper transition-[grid-template-rows] duration-300 ease-[var(--ease-out-expo)] data-[open]:grid-rows-[1fr] data-[open]:border-b md:hidden">
+    <div class="overflow-hidden">
+      <div class="container-x flex flex-col py-2">
+        {NAV.map((item) => (
+          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined} class="flex items-center justify-between border-b border-line py-3.5 font-display text-2xl font-semibold last:border-0 aria-[current=page]:text-muted">
+            {item.label} <Icon name="arrow" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>

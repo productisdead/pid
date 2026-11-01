@@ -1,0 +1,132 @@
+---
+import Base from '@/layouts/Base.astro';
+import SkillCard from '@/components/SkillCard.astro';
+import Icon from '@/components/Icon.astro';
+import Newsletter from '@/components/Newsletter.astro';
+import { getSkills, uniqueSorted } from '@/lib/content';
+
+const skills = await getSkills();
+const categories = uniqueSorted(skills.map((s) => s.data.category));
+const count = (c: string) => skills.filter((s) => s.data.category === c).length;
+---
+<Base title="Skills hub" description="Free, drop-in agent skills (SKILL.md) that encode product judgment. For Claude, ChatGPT and Cursor.">
+  <header class="relative overflow-hidden border-b border-line">
+    <div class="dots pointer-events-none absolute inset-0 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+    <div class="container-x relative pb-12 pt-12 sm:pt-20">
+      <p data-reveal class="eyebrow">Skills hub · {skills.length} skills · all free</p>
+      <h1 data-reveal style="--d:1" class="mt-4 max-w-4xl font-display text-[clamp(2.75rem,7vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.04em]">
+        Product judgment, <span class="marker" data-reveal>packaged</span> for agents.
+      </h1>
+      <p data-reveal style="--d:2" class="mt-6 max-w-2xl text-lg text-ink-2">
+        Each skill is a single <code class="rounded bg-card px-1.5 py-0.5 font-mono text-[0.9em] ring-1 ring-line">SKILL.md</code> file.
+        Drop it in your agent, and it stops writing generic slop and starts asking the questions a good PM would.
+      </p>
+      <div data-reveal style="--d:3" class="mt-8 flex max-w-xl items-center gap-3 rounded-2xl border border-line bg-card p-1.5 pl-4 shadow-card focus-within:border-ink">
+        <Icon name="search" class="shrink-0 text-muted" />
+        <label for="skill-q" class="sr-only">Filter skills</label>
+        <input id="skill-q" data-skill-q type="search" placeholder="Filter skills: prd, interviews, metrics…" autocomplete="off" class="h-11 w-full bg-transparent outline-none placeholder:text-muted" />
+      </div>
+    </div>
+  </header>
+
+  <div class="container-x mt-10 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[13rem_minmax(0,1fr)]">
+    <!-- categories (sidebar on desktop, chips on mobile) -->
+    <aside class="min-w-0">
+      <nav aria-label="Categories" class="lg:sticky lg:top-24">
+        <p class="eyebrow hidden lg:block">Categories</p>
+        <ul class="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 lg:mx-0 lg:mt-4 lg:flex-col lg:gap-0.5 lg:overflow-visible lg:px-0 [scrollbar-width:none]">
+          <li><button type="button" data-cat="" aria-pressed="true" class="cat-btn">All <span>{skills.length}</span></button></li>
+          {categories.map((c) => (
+            <li><button type="button" data-cat={c} aria-pressed="false" class="cat-btn">{c} <span>{count(c)}</span></button></li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+
+    <section aria-label="Skills">
+      <div class="flex items-center justify-between gap-4 border-b border-line pb-4">
+        <p class="text-sm text-muted" aria-live="polite"><span data-skill-count>{skills.length}</span> skills</p>
+        <div role="tablist" aria-label="Sort" class="flex rounded-full border border-line bg-card p-1 text-sm">
+          {[['featured', 'Featured'], ['new', 'Newest'], ['az', 'A–Z']].map(([v, l], i) => (
+            <button type="button" role="tab" data-sort={v} aria-selected={i === 0 ? 'true' : 'false'} class="rounded-full px-3.5 py-1 font-medium text-muted transition-colors aria-selected:bg-ink aria-selected:text-paper">{l}</button>
+          ))}
+        </div>
+      </div>
+      <ul data-skill-grid class="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
+        {skills.map((s, i) => <SkillCard skill={s} index={i} />)}
+      </ul>
+      <div data-skill-empty hidden class="py-24 text-center">
+        <img src="/brand/cat-head.svg" alt="" width="96" height="96" class="mx-auto w-24 opacity-80" />
+        <p class="hand mt-4 text-3xl">No skills match that.</p>
+        <p class="mt-1 text-muted">The cat suggests a shorter search.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="container-x mt-28"><Newsletter compact /></div>
+</Base>
+
+<style>
+  .cat-btn {
+    display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 0.75rem;
+    white-space: nowrap; border-radius: 9999px; border: 1px solid var(--line); padding: 0.4rem 0.9rem;
+    font-size: 0.875rem; font-weight: 500; color: var(--ink-2); transition: background-color .2s, color .2s;
+  }
+  .cat-btn span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+  .cat-btn:hover { background: var(--paper-2); }
+  .cat-btn[aria-pressed='true'] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .cat-btn[aria-pressed='true'] span { color: inherit; opacity: 0.6; }
+  @media (min-width: 1024px) {
+    .cat-btn { border-color: transparent; border-radius: 0.6rem; padding: 0.5rem 0.75rem; }
+  }
+</style>
+
+<script>
+  function initSkills() {
+    const grid = document.querySelector<HTMLElement>('[data-skill-grid]');
+    if (!grid) return;
+    const cards = [...grid.querySelectorAll<HTMLElement>('[data-skill]')];
+    const q = document.querySelector<HTMLInputElement>('[data-skill-q]')!;
+    const catBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-cat]')];
+    const sortBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-sort]')];
+    const countEl = document.querySelector('[data-skill-count]')!;
+    const empty = document.querySelector<HTMLElement>('[data-skill-empty]')!;
+
+    const params = new URLSearchParams(location.search);
+    let cat = params.get('category') ?? '';
+    let sort = params.get('sort') ?? 'featured';
+    q.value = params.get('q') ?? '';
+
+    const sorters: Record<string, (a: HTMLElement, b: HTMLElement) => number> = {
+      featured: (a, b) => +b.dataset.featured! - +a.dataset.featured! || +b.dataset.date! - +a.dataset.date!,
+      new: (a, b) => +b.dataset.date! - +a.dataset.date!,
+      az: (a, b) => a.dataset.title!.localeCompare(b.dataset.title!),
+    };
+
+    const apply = () => {
+      const term = q.value.trim().toLowerCase();
+      let shown = 0;
+      [...cards].sort(sorters[sort] ?? sorters.featured).forEach((el, i) => {
+        el.style.order = String(i);
+        const ok = (!cat || el.dataset.category === cat) && (!term || term.split(/\s+/).every((t) => el.dataset.haystack!.includes(t)));
+        el.hidden = !ok;
+        if (ok) { shown++; el.classList.add('is-visible'); }
+      });
+      countEl.textContent = String(shown);
+      empty.hidden = shown > 0;
+      catBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cat === cat)));
+      sortBtns.forEach((b) => b.setAttribute('aria-selected', String(b.dataset.sort === sort)));
+      const p = new URLSearchParams();
+      if (cat) p.set('category', cat);
+      if (sort !== 'featured') p.set('sort', sort);
+      if (term) p.set('q', term);
+      history.replaceState(history.state, '', p.size ? `?${p}` : location.pathname);
+    };
+
+    catBtns.forEach((b) => b.addEventListener('click', () => { cat = b.dataset.cat ?? ''; apply(); }));
+    sortBtns.forEach((b) => b.addEventListener('click', () => { sort = b.dataset.sort!; apply(); }));
+    q.addEventListener('input', apply);
+    if (cat || q.value || sort !== 'featured') apply();
+  }
+  document.addEventListener('astro:page-load', initSkills);
+</script>

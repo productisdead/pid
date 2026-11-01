@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 820" width="1600" height="820" role="img" aria-label="Three jobs of product management: discovery, strategy and execution. A good PRD can cover all three.">
+<rect width="1600" height="820" fill="#FAF8F3"/>
+<text x="96" y="110" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="26" fill="#6B6560" letter-spacing="3">THREE JOBS OF PRODUCT MANAGEMENT</text>
+<text x="96" y="180" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="60" font-weight="800" fill="#141112" letter-spacing="-2">A good PRD can cover all three</text>
+<rect x="100" y="240" width="440" height="400" rx="34" fill="#F4A261" stroke="#141112" stroke-width="5"/>
+<text x="144" y="320" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="30" font-weight="700" fill="#141112" opacity="0.7">01</text>
+<text x="144" y="410" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="66" font-weight="800" fill="#141112" letter-spacing="-2">Discovery</text>
+<text x="144" y="490" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#141112">Talk to potential users.</text>
+<text x="144" y="532" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#141112">Articulate their</text>
+<text x="144" y="574" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#141112">problems and pains.</text>
+<rect x="580" y="240" width="440" height="400" rx="34" fill="#FED74F" stroke="#141112" stroke-width="5"/>
+<text x="624" y="320" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="30" font-weight="700" fill="#141112" opacity="0.7">02</text>
+<text x="624" y="410" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="66" font-weight="800" fill="#141112" letter-spacing="-2">Strategy</text>
+<text x="624" y="490" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#141112">Stay on the product-</text>
+<text x="624" y="532" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#141112">market-fit track. Measure</text>
+<text x="624" y="574" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#141112">success vs. company goals.</text>
+<rect x="1060" y="240" width="440" height="400" rx="34" fill="#264653" stroke="#141112" stroke-width="5"/>
+<text x="1104" y="320" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="30" font-weight="700" fill="#FAF8F3" opacity="0.7">03</text>
+<text x="1104" y="410" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="66" font-weight="800" fill="#FAF8F3" letter-spacing="-2">Execution</text>
+<text x="1104" y="490" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#FAF8F3">Make sure we can</text>
+<text x="1104" y="532" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#FAF8F3">actually deliver what</text>
+<text x="1104" y="574" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#FAF8F3">we plan to deliver.</text>
+<path d="M120 680 q0 30 30 30 H1450 q30 0 30 -30" fill="none" stroke="#141112" stroke-width="5" stroke-linecap="round"/>
+<text x="800.0" y="770" text-anchor="middle" font-family="'Indie Flower', 'Comic Sans MS', cursive" font-size="44" fill="#141112">= the full context of a feature (or a set of features)</text>
+</svg>

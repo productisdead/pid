@@ -1,0 +1,18 @@
+---
+import Base from '@/layouts/Base.astro';
+import Icon from '@/components/Icon.astro';
+---
+<Base title="Page not found" noindex>
+  <section class="container-x grid min-h-[70vh] place-items-center py-20 text-center">
+    <div>
+      <img src="/brand/cat.svg" alt="" width="363" height="316" class="mx-auto w-64 -rotate-6 opacity-90 grayscale" />
+      <p class="eyebrow mt-8">Error 404</p>
+      <h1 class="mt-3 font-display text-5xl font-extrabold tracking-tight sm:text-6xl">This page is <span class="strike is-drawn">dead.<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 25 3, 55 9, 98 3" /></svg></span></h1>
+      <p class="hand mt-3 text-3xl text-ink-2">Actually dead. Unlike product.</p>
+      <div class="mt-8 flex justify-center gap-3">
+        <a href="/" class="btn btn-primary h-11"><Icon name="arrowLeft" size={16} /> Back home</a>
+        <button type="button" data-search-open class="btn btn-ghost h-11"><Icon name="search" size={16} /> Search</button>
+      </div>
+    </div>
+  </section>
+</Base>

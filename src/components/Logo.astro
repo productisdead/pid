@@ -1,0 +1,14 @@
+---
+interface Props { class?: string; showText?: boolean }
+const { class: cls = '', showText = true } = Astro.props;
+---
+<a href="/" class:list={['group inline-flex items-center gap-2.5', cls]} aria-label="productisdead — home">
+  <span class="relative grid size-9 place-items-center overflow-hidden rounded-xl bg-yellow ring-1 ring-black/10 transition-transform duration-300 ease-[var(--ease-spring)] group-hover:-rotate-6 group-hover:scale-105">
+    <img src="/brand/cat-head.svg" alt="" width="36" height="36" class="size-[118%] max-w-none translate-y-[6%]" />
+  </span>
+  {showText && (
+    <span class="font-display text-[1.15rem] font-bold tracking-tight">
+      product<span class="text-muted">is</span><span class="strike">dead<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M2 6 C 30 2, 60 9, 98 4" /></svg></span>
+    </span>
+  )}
+</a>

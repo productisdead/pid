@@ -1,0 +1,10 @@
+---
+interface Props { eyebrow: string; title: string; hand?: string }
+const { eyebrow, title, hand } = Astro.props;
+---
+<header class="container-x pb-10 pt-12 sm:pt-20">
+  <p data-reveal class="eyebrow">{eyebrow}</p>
+  <h1 data-reveal style="--d:1" class="mt-4 max-w-4xl font-display text-[clamp(2.75rem,7vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.04em]">{title}</h1>
+  {hand && <p data-reveal style="--d:2" class="hand mt-3 -rotate-1 text-2xl text-ink-2 sm:text-3xl">{hand}</p>}
+  <div data-reveal style="--d:3" class="mt-8"><slot /></div>
+</header>

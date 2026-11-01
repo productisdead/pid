@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Anatomy of a PRD people read: background stories, user journey and out of scope get compliments; context, problem, hypothesis, requirements, mocks, open issues and experiment plan open discussion; exhaustive dependencies and template filler are fluff.">
+<rect width="1600" height="1000" fill="#FAF8F3"/>
+<text x="96" y="110" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="26" fill="#6B6560" letter-spacing="3">ANATOMY OF A PRD PEOPLE READ</text>
+<text x="96" y="180" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="60" font-weight="800" fill="#141112" letter-spacing="-2">Skip the fluff, keep the why</text>
+<rect x="96" y="240" width="760" height="700" rx="26" fill="#FFFFFF" stroke="#141112" stroke-width="5"/>
+<rect x="96" y="240" width="760" height="64" rx="26" fill="#141112"/><rect x="96" y="278" width="760" height="26" fill="#141112"/>
+<circle cx="136" cy="272" r="9" fill="#E4572E"/>
+<circle cx="166" cy="272" r="9" fill="#FED74F"/>
+<circle cx="196" cy="272" r="9" fill="#8BC34A"/>
+<text x="246" y="282" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="24" fill="#FAF8F3">PRD.md</text>
+<rect x="120" y="324" width="712" height="50" rx="12" fill="#FED74F"/>
+<text x="148" y="360" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="700" fill="#141112">Background (real stories)</text>
+<text x="800" y="362" text-anchor="end" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="34" fill="#141112">★</text>
+<text x="148" y="414" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="400" fill="#141112">Context &amp; problem</text>
+<text x="148" y="468" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="400" fill="#141112">Hypothesis / assumptions</text>
+<rect x="120" y="486" width="712" height="50" rx="12" fill="#FED74F"/>
+<text x="148" y="522" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="700" fill="#141112">User journey</text>
+<text x="800" y="524" text-anchor="end" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="34" fill="#141112">★</text>
+<text x="148" y="576" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="400" fill="#141112">Solution requirements</text>
+<text x="148" y="630" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="400" fill="#141112">Design mocks</text>
+<rect x="120" y="648" width="712" height="50" rx="12" fill="#FED74F"/>
+<text x="148" y="684" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="700" fill="#141112">Out of scope</text>
+<text x="800" y="686" text-anchor="end" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="34" fill="#141112">★</text>
+<text x="148" y="738" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="400" fill="#141112">Open issues</text>
+<text x="148" y="792" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="400" fill="#141112">Experiment plan &amp; KPIs</text>
+<text x="148" y="846" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="400" fill="#6B6560">Every dependency, ever</text>
+<line x1="140" y1="836" x2="490.4" y2="834" stroke="#E4572E" stroke-width="6" stroke-linecap="round"/>
+<text x="148" y="900" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="400" fill="#6B6560">Template filler nobody asked for</text>
+<line x1="140" y1="890" x2="642.4" y2="888" stroke="#E4572E" stroke-width="6" stroke-linecap="round"/>
+<rect x="940" y="260" width="560" height="180" rx="22" fill="#FAF8F3" stroke="#141112" stroke-width="4"/>
+<rect x="970" y="294" width="34" height="34" rx="8" fill="#FED74F" stroke="#141112" stroke-width="3"/>
+<text x="1024" y="322" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#141112">Always gets compliments</text>
+<text x="972" y="374" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="27" fill="#6B6560">Out of scope, user journey,</text>
+<text x="972" y="412" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="27" fill="#6B6560">and real background stories.</text>
+<rect x="940" y="480" width="560" height="180" rx="22" fill="#FAF8F3" stroke="#141112" stroke-width="4"/>
+<rect x="970" y="514" width="34" height="34" rx="8" fill="#FFFFFF" stroke="#141112" stroke-width="3"/>
+<text x="1024" y="542" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#141112">Opens a room for discussion</text>
+<text x="972" y="594" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="27" fill="#6B6560">Context, problem, hypothesis,</text>
+<text x="972" y="632" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="27" fill="#6B6560">mocks, open issues, experiments.</text>
+<rect x="940" y="700" width="560" height="180" rx="22" fill="#FAF8F3" stroke="#141112" stroke-width="4"/>
+<rect x="970" y="734" width="34" height="34" rx="8" fill="#E4572E" stroke="#141112" stroke-width="3"/>
+<text x="1024" y="762" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#141112">Fluff: cut it</text>
+<text x="972" y="814" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="27" fill="#6B6560">Dependencies live better in your</text>
+<text x="972" y="852" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="27" fill="#6B6560">task tool. Question AI filler.</text>
+<text x="960" y="940" font-family="'Indie Flower', 'Comic Sans MS', cursive" font-size="40" fill="#264653">written for devs &amp; designers.</text>
+</svg>

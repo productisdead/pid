@@ -1,0 +1,29 @@
+---
+import type { Post } from '@/lib/content';
+import { formatDate, readingTime } from '@/lib/content';
+import Stance from './Stance.astro';
+import Icon from './Icon.astro';
+interface Props { post: Post; index?: number }
+const { post, index = 0 } = Astro.props;
+const { title, description, date, stance } = post.data;
+---
+<li data-reveal style={`--d:${Math.min(index, 6)}`}>
+  <a href={`/writing/${post.id}`} class="group relative grid gap-3 border-b border-line py-7 sm:grid-cols-[9rem_1fr_auto] sm:gap-8">
+    <div class="flex items-center gap-3 sm:flex-col sm:items-start sm:gap-2">
+      <time datetime={date.toISOString()} class="font-mono text-xs text-muted">{formatDate(date, 'short')}</time>
+      <Stance stance={stance} />
+    </div>
+    <div class="min-w-0">
+      <h3 class="font-display text-2xl font-semibold leading-tight tracking-tight transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-x-1" transition:name={`post-title-${post.id}`}>
+        {title}
+      </h3>
+      <p class="mt-2 line-clamp-2 text-ink-2/80">{description}</p>
+    </div>
+    <div class="hidden items-center gap-3 text-sm text-muted sm:flex">
+      <span class="font-mono text-xs">{readingTime(post.body)} min</span>
+      <span class="grid size-10 place-items-center rounded-full border border-line transition-all duration-300 group-hover:-rotate-45 group-hover:border-ink group-hover:bg-ink group-hover:text-paper">
+        <Icon name="arrow" size={16} />
+      </span>
+    </div>
+  </a>
+</li>

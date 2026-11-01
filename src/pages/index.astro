@@ -1,0 +1,159 @@
+---
+import Base from '@/layouts/Base.astro';
+import Cat from '@/components/Cat.astro';
+import Marquee from '@/components/Marquee.astro';
+import PostRow from '@/components/PostRow.astro';
+import SkillCard from '@/components/SkillCard.astro';
+import Stance from '@/components/Stance.astro';
+import Newsletter from '@/components/Newsletter.astro';
+import Icon from '@/components/Icon.astro';
+import { getPosts, getSkills, formatDate, readingTime } from '@/lib/content';
+
+const posts = await getPosts();
+const skills = await getSkills();
+const featured = posts.find((p) => p.data.featured) ?? posts[0];
+const rest = posts.filter((p) => p !== featured).slice(0, 4);
+const topSkills = skills.slice(0, 6);
+
+const debate = [
+  {
+    claim: 'AI writes the PRD now.',
+    verdict: 'It writes a PRD. Writing was never the hard part — knowing which problem deserves one was.',
+  },
+  {
+    claim: 'Agents ship features without us.',
+    verdict: 'Great. Now you can ship the wrong thing ten times faster. Someone still has to say no.',
+  },
+  {
+    claim: 'Everyone is a builder now.',
+    verdict: 'When everyone can build, the scarce skill becomes taste. That’s the job. It always was.',
+  },
+];
+---
+<Base>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="container-x grid items-center gap-12 pb-16 pt-10 sm:pt-16 lg:grid-cols-[1.15fr_1fr] lg:gap-6 lg:pb-24 lg:pt-20">
+      <div>
+        <p data-reveal class="eyebrow flex items-center gap-2">
+          <span class="relative flex size-2"><span class="absolute inline-flex size-full animate-ping rounded-full bg-red opacity-60"></span><span class="relative inline-flex size-2 rounded-full bg-red"></span></span>
+          Live from the funeral
+        </p>
+        <h1 class="mt-5 font-display text-[clamp(3.2rem,9vw,6.8rem)] font-extrabold leading-[0.92] tracking-[-0.045em]">
+          <span data-reveal class="block" style="--d:1">Product</span>
+          <span data-reveal class="block" style="--d:2">is <span class="strike [transition-delay:.9s]">dead.<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 25 3, 55 9, 98 3" /></svg></span></span>
+        </h1>
+        <p data-reveal style="--d:4" class="hand mt-2 -rotate-2 pl-1 text-4xl text-ink-2 sm:text-5xl">
+          Long live product.
+        </p>
+        <p data-reveal style="--d:5" class="mt-8 max-w-xl text-lg leading-relaxed text-ink-2 sm:text-xl">
+          AI was supposed to make product managers obsolete. Instead it automated everything <em>except</em> the hard part.
+          Essays for the ones still standing, and a free hub of <span class="marker" data-reveal>AI skills</span> to make it unfair.
+        </p>
+        <div data-reveal style="--d:6" class="mt-9 flex flex-wrap items-center gap-3">
+          <a href="/writing" class="btn btn-primary h-12 px-6">Read the essays <Icon name="arrow" size={16} /></a>
+          <a href="/skills" class="btn btn-ghost h-12 px-6">Browse {skills.length} skills</a>
+        </div>
+      </div>
+      <Cat class="mx-auto w-full max-w-[520px] lg:max-w-none" />
+    </div>
+  </section>
+
+  <Marquee />
+
+  <!-- THE DEBATE -->
+  <section class="container-x py-24 sm:py-32">
+    <div class="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <p data-reveal class="eyebrow">The debate</p>
+        <h2 data-reveal style="--d:1" class="mt-4 font-display text-4xl font-bold leading-[1.02] tracking-tight sm:text-5xl">
+          Reports of its death <br class="hidden sm:block" />are exaggerated.
+        </h2>
+        <p data-reveal style="--d:2" class="mt-5 max-w-sm text-ink-2">
+          Every week someone on LinkedIn buries product management. Here's what they get right, and why they're wrong anyway.
+        </p>
+        <a data-reveal style="--d:3" href="/manifesto" class="link mt-6 inline-flex items-center gap-2 font-semibold">Read the manifesto <Icon name="arrow" size={16} /></a>
+      </div>
+      <ol class="space-y-4">
+        {debate.map((d, i) => (
+          <li data-reveal style={`--d:${i}`} class="card group relative overflow-hidden p-6 sm:p-8">
+            <div class="flex items-start gap-5">
+              <span class="font-mono text-sm text-muted">0{i + 1}</span>
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-3">
+                  <Stance stance="hot-take" />
+                </div>
+                <p class="mt-3 font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+                  <span class="strike-line">{d.claim}</span>
+                </p>
+                <div class="mt-5 flex items-start gap-3 border-t border-dashed border-line-strong pt-5">
+                  <Stance stance="rebuttal" class="mt-0.5 shrink-0" />
+                  <p class="text-lg leading-snug text-ink-2">{d.verdict}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  {featured && (
+    <section class="container-x">
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <p data-reveal class="eyebrow">Writing</p>
+          <h2 data-reveal style="--d:1" class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">Latest essays</h2>
+        </div>
+        <a href="/writing" class="link hidden shrink-0 items-center gap-2 font-semibold sm:inline-flex">All writing <Icon name="arrow" size={16} /></a>
+      </div>
+
+      <a data-reveal href={`/writing/${featured.id}`} class="group relative mt-10 block overflow-hidden rounded-3xl bg-ink p-8 text-paper sm:p-12">
+        <div class="pointer-events-none absolute -right-24 -top-24 hidden size-96 rounded-full bg-yellow/90 md:block transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-110"></div>
+        <img src="/brand/cat.svg" alt="" width="363" height="316" loading="lazy" class="pointer-events-none absolute -right-6 -top-4 hidden w-72 rotate-[-8deg] transition-transform duration-700 ease-[var(--ease-spring)] group-hover:rotate-0 group-hover:scale-105 md:block" />
+        <div class="relative max-w-2xl">
+          <div class="flex flex-wrap items-center gap-3 text-sm text-paper/70">
+            <Stance stance={featured.data.stance} class="!bg-yellow !text-brand-ink" />
+            <span class="font-mono text-xs">Featured · {formatDate(featured.data.date)} · {readingTime(featured.body)} min read</span>
+          </div>
+          <h3 class="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-tight sm:text-6xl" transition:name={`post-title-${featured.id}`}>{featured.data.title}</h3>
+          <p class="mt-5 max-w-xl text-lg text-paper/75">{featured.data.description}</p>
+          <span class="mt-8 inline-flex items-center gap-2 font-semibold text-yellow">
+            Read the essay <Icon name="arrow" size={16} class="transition-transform group-hover:translate-x-1" />
+          </span>
+        </div>
+      </a>
+
+      <ul class="mt-6">
+        {rest.map((post, i) => <PostRow post={post} index={i} />)}
+      </ul>
+    </section>
+  )}
+
+  <!-- SKILLS -->
+  <section class="mt-28 border-y border-line bg-paper-2/60 py-24">
+    <div class="container-x">
+      <div class="grid items-end gap-6 sm:grid-cols-[1fr_auto]">
+        <div>
+          <p data-reveal class="eyebrow">Skills hub</p>
+          <h2 data-reveal style="--d:1" class="mt-3 max-w-2xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
+            Give your agent a PM brain. <span class="text-muted">Free.</span>
+          </h2>
+          <p data-reveal style="--d:2" class="mt-4 max-w-xl text-ink-2">
+            Drop-in <code class="rounded bg-card px-1.5 py-0.5 font-mono text-[0.9em] ring-1 ring-line">SKILL.md</code> files for Claude, ChatGPT and Cursor.
+            Each one encodes a piece of product judgment, so the robots do the busywork and you keep the opinions.
+          </p>
+        </div>
+        <a data-reveal href="/skills" class="btn btn-yellow h-12 px-6">Explore the hub <Icon name="arrow" size={16} /></a>
+      </div>
+      <ul class="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {topSkills.map((s, i) => <SkillCard skill={s} index={i} />)}
+      </ul>
+    </div>
+  </section>
+
+  <div class="container-x mt-24">
+    <Newsletter />
+  </div>
+</Base>

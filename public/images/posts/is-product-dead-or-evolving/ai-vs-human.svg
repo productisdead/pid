@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 860" width="1600" height="860" role="img" aria-label="AI speeds up the deliverables: PRDs, sprint tasks, wireframes, MVPs. Humans still own the direction: customers, vision, innovation, oversight.">
+<rect width="1600" height="860" fill="#FAF8F3"/>
+<rect x="110" y="90" width="660" height="680" rx="40" fill="#FED74F" stroke="#141112" stroke-width="5"/>
+<text x="166" y="180" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="24" fill="#141112" letter-spacing="3">AI SPEEDS UP</text>
+<text x="166" y="260" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="62" font-weight="800" fill="#141112" letter-spacing="-2">The deliverables</text>
+<circle cx="182" cy="358" r="12" fill="#141112"/>
+<text x="214" y="370" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#141112">PRDs on the fly</text>
+<circle cx="182" cy="450" r="12" fill="#141112"/>
+<text x="214" y="462" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#141112">Sprint tasks in seconds</text>
+<circle cx="182" cy="542" r="12" fill="#141112"/>
+<text x="214" y="554" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#141112">Wireframes</text>
+<circle cx="182" cy="634" r="12" fill="#141112"/>
+<text x="214" y="646" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#141112">MVPs &amp; prototypes</text>
+<circle cx="182" cy="726" r="12" fill="#141112"/>
+<text x="214" y="738" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#141112">Content &amp; campaigns</text>
+<rect x="830" y="90" width="660" height="680" rx="40" fill="#141112" stroke="#141112" stroke-width="5"/>
+<text x="886" y="180" font-family="'JetBrains Mono', ui-monospace, Menlo, monospace" font-size="24" fill="#FED74F" letter-spacing="3">HUMANS STILL OWN</text>
+<text x="886" y="260" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="62" font-weight="800" fill="#FAF8F3" letter-spacing="-2">The direction</text>
+<circle cx="902" cy="358" r="12" fill="#FED74F"/>
+<text x="934" y="370" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#FAF8F3">Understanding customers</text>
+<circle cx="902" cy="450" r="12" fill="#FED74F"/>
+<text x="934" y="462" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#FAF8F3">Product vision</text>
+<circle cx="902" cy="542" r="12" fill="#FED74F"/>
+<text x="934" y="554" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#FAF8F3">Out-innovating competitors</text>
+<circle cx="902" cy="634" r="12" fill="#FED74F"/>
+<text x="934" y="646" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#FAF8F3">Oversight &amp; fine-tuning</text>
+<circle cx="902" cy="726" r="12" fill="#FED74F"/>
+<text x="934" y="738" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="36" fill="#FAF8F3">Culture &amp; politics</text>
+<circle cx="800" cy="430" r="62" fill="#FAF8F3" stroke="#141112" stroke-width="5"/>
+<text x="800" y="452" text-anchor="middle" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="58" font-weight="800" fill="#141112">+</text>
+<text x="800" y="830" text-anchor="middle" font-family="'Indie Flower', 'Comic Sans MS', cursive" font-size="40" fill="#6B6560">not autopilot: a co-pilot</text>
+</svg>
