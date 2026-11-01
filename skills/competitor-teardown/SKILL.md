@@ -1,12 +1,14 @@
 ---
-title: Competitor Teardown
+name: competitor-teardown
 description: A structured, unsentimental teardown of a competitor's product, positioning and pricing, ending in what you should do (and not copy).
-category: Research
-icon: 🔍
-color: pink
-tags: [competition, positioning, strategy]
-level: intermediate
-date: 2026-08-18
+metadata:
+  title: Competitor Teardown
+  category: Research
+  icon: 🔍
+  color: pink
+  tags: [competition, positioning, strategy]
+  level: intermediate
+  date: 2026-08-18
 ---
 
 # Competitor Teardown

@@ -1,12 +1,14 @@
 ---
-title: Metric Tree Builder
+name: metric-tree-builder
 description: Decomposes a north-star metric into the input levers a team can actually move, with owners, guardrails and leading indicators.
-category: Analytics
-icon: 🌳
-color: teal
-tags: [metrics, north-star, okrs]
-level: advanced
-date: 2026-08-30
+metadata:
+  title: Metric Tree Builder
+  category: Analytics
+  icon: 🌳
+  color: teal
+  tags: [metrics, north-star, okrs]
+  level: advanced
+  date: 2026-08-30
 ---
 
 # Metric Tree Builder

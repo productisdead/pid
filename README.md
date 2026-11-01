@@ -1,70 +1,100 @@
-# productisdead
+<p align="center">
+  <img src="public/brand/cat.svg" alt="productisdead cat" width="120">
+</p>
 
-> Product is dead. Long live product. *Not dead yet.*
+<h1 align="center">productisdead</h1>
 
-Personal site: essays on why AI didn't kill product management, plus a free hub of agent skills (`SKILL.md` files) for PMs.
+<p align="center">
+  <b>Product is dead. Long live product.</b><br>
+  Free, open-source agent skills for product managers, plus essays on why AI didn't kill the job.
+</p>
 
-Built with [Astro](https://astro.build) (Vite under the hood) + Tailwind CSS v4. Every page is static HTML; the whole site ships ~7 KB of gzipped JS.
+<p align="center">
+  <a href="#skills">Skills</a> ·
+  <a href="#install">Install</a> ·
+  <a href="https://productisdead.com">Website</a> ·
+  <a href="CONTRIBUTING.md">Contribute</a>
+</p>
 
-## Quick start
+---
+
+AI makes PRDs, roadmaps and status updates in seconds. The judgment behind them is still the job. Each skill here is one piece of product judgment, written down so an agent can apply it: Claude, Claude Code, ChatGPT, Cursor, or anything else that reads `SKILL.md` files.
+
+## Skills
+
+Every skill lives in its own folder under [`skills/`](skills) as a standard `SKILL.md`.
+
+| Skill | Category | What it does |
+| --- | --- | --- |
+| 🧭 [product-vision](skills/product-vision/SKILL.md) | Strategy | Builds or reviews a vision asset that tells one traceable story: job → problems → counters → Hooked loop → key results → proof. |
+| 🔦 [prd-interrogator](skills/prd-interrogator/SKILL.md) | Strategy | Stress-tests a spec like a skeptical VP. Finds the riskiest assumption, the missing "no", and the metric that would prove you wrong. |
+| 🧩 [prd-chunker](skills/prd-chunker/SKILL.md) | Shipping | Breaks a long PRD into 5–12 shippable chunks with demos, owners and a Gantt, opened by a plain-language "why" anyone can follow. |
+| 🪓 [ruthless-prioritizer](skills/ruthless-prioritizer/SKILL.md) | Strategy | Scores a backlog with RICE, then argues with its own scores. Flags fake precision, sandbagged effort and pet projects. |
+| 🔍 [competitor-teardown](skills/competitor-teardown/SKILL.md) | Research | An unsentimental teardown of a competitor's product, positioning and pricing, ending in what you should do (and not copy). |
+| 🎙️ [interview-synthesizer](skills/interview-synthesizer/SKILL.md) | Research | Turns customer interview transcripts into themes, evidence and the one surprising outlier worth chasing. |
+| 🌳 [metric-tree-builder](skills/metric-tree-builder/SKILL.md) | Analytics | Decomposes a north-star metric into input levers a team can actually move, with owners, guardrails and leading indicators. |
+| 📣 [release-notes-writer](skills/release-notes-writer/SKILL.md) | Shipping | Converts a messy changelog, PR list or ticket dump into release notes users actually read. Benefits first, jargon never. |
+
+Browse them with previews, filters and search at [productisdead.com/skills](https://productisdead.com/skills).
+
+## Install
+
+### Claude Code
+
+Install every skill for all your projects:
 
 ```bash
-npm install
-npm run dev        # http://localhost:4321 (drafts visible)
-npm run build      # type-check + static build into dist/
-npm run preview    # serve the production build
+git clone --depth 1 https://github.com/productisdead/pid.git /tmp/pid
+mkdir -p ~/.claude/skills && cp -r /tmp/pid/skills/[!_]* ~/.claude/skills/
 ```
 
-## Writing content
-
-Everything is a Markdown file. The filename becomes the URL.
-
-### A new blog post
+Or just one:
 
 ```bash
-npm run new:post "AI won't take your job, your backlog will"
+mkdir -p ~/.claude/skills/prd-interrogator && curl -fsSL \
+  https://raw.githubusercontent.com/productisdead/pid/main/skills/prd-interrogator/SKILL.md \
+  -o ~/.claude/skills/prd-interrogator/SKILL.md
 ```
 
-That creates `src/content/posts/ai-wont-take-your-job-your-backlog-will.md` as a draft. Or copy `src/content/posts/_template.md`, which documents every field.
+To share a skill with your team, put it in `.claude/skills/` inside your project repo instead. Claude picks a skill up automatically when your request matches its description.
 
-| Field | Notes |
-| --- | --- |
-| `title`, `description`, `date` | Required |
-| `stance` | `hot-take` (the cynical take) · `rebuttal` (the counter-argument) · `notes` (practical) |
-| `tags` | Generate `/writing/tag/<tag>` pages |
-| `featured` | The newest featured post gets the big card on the homepage |
-| `draft` | Visible in dev only |
-| `skills` | Skill slugs to recommend at the end of the post |
+### Claude.ai and the Claude app
 
-### A new skill
+Zip a skill folder (for example `prd-interrogator/`) and upload it under **Settings → Capabilities → Skills**.
 
-```bash
-npm run new:skill "Stakeholder Translator"
+### ChatGPT, Cursor and everything else
+
+A skill is plain Markdown. Paste the body of any `SKILL.md` into a custom GPT, a project's instructions, a Cursor rule, or straight into the chat.
+
+## What's in a skill
+
+```markdown
+---
+name: prd-interrogator
+description: Stress-tests a spec like a skeptical VP. …
+metadata:            # used by the website only; agents ignore it
+  title: PRD Interrogator
+  category: Strategy
+  icon: 🔦
+---
+
+# PRD Interrogator
+
+## When to use
+## Instructions
+## Output format
 ```
 
-Frontmatter is the catalog metadata (category, icon emoji, cover `color`, tags, level…). **The body is the skill itself.** Visitors can preview it, copy it, download it as a valid `SKILL.md`, or install it with one `curl` command. New categories show up in the sidebar automatically.
+`name` and `description` follow the [Agent Skills](https://agentskills.io) format. The description is what an agent reads to decide whether the skill applies, so it carries the most weight.
 
-Cover colors: `yellow`, `orange`, `teal`, `pink`, `ink`, `lime`.
+## Contributing
 
-## Configuration
+New skills and sharper versions of existing ones are welcome. Good skills are opinionated: they encode a point of view, not a template. See [CONTRIBUTING.md](CONTRIBUTING.md) for the format and how to preview your skill on the site.
 
-`src/site.config.ts` holds the site URL, author, social links (empty = hidden), nav, and the newsletter form. Set `newsletter.action` to any provider that accepts a form POST with an `email` field (Buttondown, Kit, Beehiiv…). Leave it empty to show an RSS call-to-action instead.
+## The website
 
-## What's included
+This repo is also the source of [productisdead.com](https://productisdead.com): essays, the manifesto, and the skills catalog. It's a static [Astro](https://astro.build) site that builds its skill pages straight from the `skills/` folder. Setup and authoring details are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-- **Pages:** home, `/writing` (+ tag pages), `/writing/<slug>`, `/skills` (filter, search and sort, synced to the URL), `/skills/<slug>`, `/manifesto`, 404
-- **Feeds & machines:** `/rss.xml`, `/sitemap-index.xml`, `/robots.txt`, `/llms.txt`, raw `/skills/<slug>.md`
-- **UX:** ⌘K / `/` search palette, dark mode (follows the OS, remembered), view transitions between pages, reveal-on-scroll, reading progress bar, sticky table of contents, copy buttons on code blocks
-- **SEO:** canonical URLs, Open Graph + Twitter cards, JSON-LD for articles
-- **Accessibility:** skip link, focus styles, keyboard-navigable search, `prefers-reduced-motion` respected
+## License
 
-## Brand
-
-- Mascot: `public/brand/cat.svg` (full), `cat-head.svg` (avatar), `favicon.svg`. Cleaned-up vectors from the logo kit.
-- Colors: yellow `#FED74F`, ink `#141112`, paper `#FAF8F3`, plus orange `#F4A261` and teal `#264653` from the alternate kit, and red `#E4572E` for strike-throughs.
-- Type: Bricolage Grotesque (display), Inter (body), JetBrains Mono (meta), Indie Flower (handwritten notes, from the logo kit). All self-hosted.
-- `public/og.png` is the default social card (1200×630).
-
-## Deploying
-
-It's a static site: deploy `dist/` anywhere (Vercel, Netlify, Cloudflare Pages, GitHub Pages). Build command `npm run build`, output directory `dist`. Update `url` in `src/site.config.ts` to your real domain first.
+[MIT](LICENSE). Use the skills anywhere, fork them, ship them in your own products.

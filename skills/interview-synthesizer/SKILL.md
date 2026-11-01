@@ -1,13 +1,15 @@
 ---
-title: Interview Synthesizer
+name: interview-synthesizer
 description: Turns a pile of customer interview transcripts into themes, evidence and, crucially, the one surprising outlier worth chasing.
-category: Research
-icon: 🎙️
-color: orange
-tags: [research, interviews, synthesis]
-level: beginner
-date: 2026-09-25
-featured: true
+metadata:
+  title: Interview Synthesizer
+  category: Research
+  icon: 🎙️
+  color: orange
+  tags: [research, interviews, synthesis]
+  level: beginner
+  date: 2026-09-25
+  featured: true
 ---
 
 # Interview Synthesizer

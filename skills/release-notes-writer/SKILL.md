@@ -1,12 +1,14 @@
 ---
-title: Release Notes Writer
+name: release-notes-writer
 description: Converts a messy changelog, PR list or ticket dump into release notes that users actually read. Benefits first, jargon never.
-category: Shipping
-icon: 📣
-color: lime
-tags: [release-notes, changelog, writing]
-level: beginner
-date: 2026-09-12
+metadata:
+  title: Release Notes Writer
+  category: Shipping
+  icon: 📣
+  color: lime
+  tags: [release-notes, changelog, writing]
+  level: beginner
+  date: 2026-09-12
 ---
 
 # Release Notes Writer
