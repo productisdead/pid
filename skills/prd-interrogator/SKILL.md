@@ -1,13 +1,15 @@
 ---
-title: PRD Interrogator
+name: prd-interrogator
 description: Stress-tests a spec like a skeptical VP. Finds the riskiest assumption, the missing "no", and the metric that would prove you wrong.
-category: Strategy
-icon: 🔦
-color: yellow
-tags: [prd, specs, critique]
-level: intermediate
-date: 2026-10-20
-featured: true
+metadata:
+  title: PRD Interrogator
+  category: Strategy
+  icon: 🔦
+  color: yellow
+  tags: [prd, specs, critique]
+  level: intermediate
+  date: 2026-10-20
+  featured: true
 ---
 
 # PRD Interrogator

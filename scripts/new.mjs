@@ -11,8 +11,9 @@ if (!['post', 'skill'].includes(kind) || !title) {
 }
 const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 const today = new Date().toISOString().slice(0, 10);
-const dir = join('src/content', kind === 'post' ? 'posts' : 'skills');
-const file = join(dir, `${slug}.md`);
+// Posts: src/content/posts/<slug>.md   Skills: skills/<slug>/SKILL.md
+const dir = kind === 'post' ? 'src/content/posts' : join('skills', slug);
+const file = kind === 'post' ? join(dir, `${slug}.md`) : join(dir, 'SKILL.md');
 if (existsSync(file)) {
   console.error(`✗ ${file} already exists`);
   process.exit(1);
@@ -36,16 +37,18 @@ Start writing. Delete \`draft: true\` when it's ready to publish.
 `;
 
 const skill = `---
-title: ${q(title)}
+name: ${slug}
 description: ""
-category: Strategy
-icon: ✦
-color: yellow
-tags: []
-level: beginner
-date: ${today}
-featured: false
-draft: true
+metadata:
+  title: ${q(title)}
+  category: Strategy
+  icon: ✦
+  color: yellow
+  tags: []
+  level: beginner
+  date: ${today}
+  featured: false
+  draft: true
 ---
 
 # ${title}

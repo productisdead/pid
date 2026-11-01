@@ -1,13 +1,15 @@
 ---
-title: Ruthless Prioritizer
+name: ruthless-prioritizer
 description: Scores a backlog with RICE, then argues with its own scores. Flags fake precision, sandbagged effort and pet projects.
-category: Strategy
-icon: 🪓
-color: ink
-tags: [prioritization, backlog, rice]
-level: intermediate
-date: 2026-10-05
-featured: true
+metadata:
+  title: Ruthless Prioritizer
+  category: Strategy
+  icon: 🪓
+  color: ink
+  tags: [prioritization, backlog, rice]
+  level: intermediate
+  date: 2026-10-05
+  featured: true
 ---
 
 # Ruthless Prioritizer
