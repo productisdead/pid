@@ -1,6 +1,6 @@
 ---
 name: interview-synthesizer
-description: Turns a pile of customer interview transcripts into themes, evidence and, crucially, the one surprising outlier worth chasing.
+description: Turns interview transcripts, call notes or survey free-text into evidence-backed themes, plus the one surprising outlier worth chasing. Use when asked for themes, insights or what customers are saying.
 metadata:
   title: Interview Synthesizer
   category: Research

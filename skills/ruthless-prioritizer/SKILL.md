@@ -1,6 +1,6 @@
 ---
 name: ruthless-prioritizer
-description: Scores a backlog with RICE, then argues with its own scores. Flags fake precision, sandbagged effort and pet projects.
+description: Scores a backlog with RICE, then challenges its own scores and insists on a stop-doing list. Use when the user shares a backlog or asks what to do first.
 metadata:
   title: Ruthless Prioritizer
   category: Strategy

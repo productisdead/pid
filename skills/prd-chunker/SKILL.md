@@ -1,6 +1,6 @@
 ---
 name: prd-chunker
-description: Breaks a long PRD into 5–12 shippable chunks a team can build, demo and ship on their own, ordered into a Gantt plan, and opens it with a plain-language "why we're doing this" that anyone outside the team can follow. Use when a PRD or spec is too long to read in one pass, when the user asks to break a spec into milestones, epics, phases or slices, to plan delivery from a PRD, or to turn a PRD into a roadmap or Gantt chart.
+description: Breaks a long PRD into 5–12 shippable chunks, orders them into a Gantt plan and opens with a plain-language why. Use when a spec needs milestones, phases or a delivery roadmap.
 metadata:
   title: PRD Chunker
   category: Shipping

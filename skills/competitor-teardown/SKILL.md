@@ -1,6 +1,6 @@
 ---
 name: competitor-teardown
-description: A structured, unsentimental teardown of a competitor's product, positioning and pricing, ending in what you should do (and not copy).
+description: Tears down a competitor's positioning, product and pricing without feature envy, ending in one move to make and what not to copy. Use when the user names a competitor or asks how they compare.
 metadata:
   title: Competitor Teardown
   category: Research

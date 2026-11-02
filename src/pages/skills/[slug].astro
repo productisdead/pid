@@ -1,10 +1,10 @@
 ---
-import { render } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import SkillCover from '@/components/SkillCover.astro';
 import SkillCard from '@/components/SkillCard.astro';
 import Icon from '@/components/Icon.astro';
-import { getSkills, formatDate, toSkillFile, type Skill } from '@/lib/content';
+import ChatLauncher from '@/components/ChatLauncher.astro';
+import { getSkills, formatDate, toSkillFile, skillGithub, skillChatLinks, skillTldr, type Skill } from '@/lib/content';
 import { SITE } from '@/site.config';
 
 export async function getStaticPaths() {
@@ -22,10 +22,16 @@ export async function getStaticPaths() {
 }
 interface Props { skill: Skill; related: Skill[] }
 const { skill, related } = Astro.props;
-const { Content } = await render(skill);
 const d = skill.data;
 const raw = toSkillFile(skill);
 const rawUrl = new URL(`/skills/${skill.id}.md`, Astro.site).toString();
+const gh = skillGithub(skill.id);
+const chat = skillChatLinks(d.title, rawUrl);
+const tldr = skillTldr(skill);
+// Description without its trailing "Use when…" trigger sentence
+const summary = d.description.replace(/\s*Use (it )?when[\s\S]*$/i, '').trim() || d.description;
+const lines = raw.split('\n').length;
+const collapsible = lines > 28;
 const install = `mkdir -p ~/.claude/skills/${skill.id} && curl -fsSL ${rawUrl} -o ~/.claude/skills/${skill.id}/SKILL.md`;
 const meta: [string, string][] = [
   ['Category', d.category],
@@ -48,44 +54,87 @@ const meta: [string, string][] = [
       </div>
 
       <div class="order-2 min-w-0 lg:order-none lg:col-start-1 lg:row-start-2">
-        <!-- Preview / Raw tabs -->
-        <div class="lg:mt-2">
-          <div role="tablist" aria-label="Skill content" class="flex items-center gap-1 border-b border-line">
-            <button type="button" role="tab" id="tab-preview" aria-controls="panel-preview" aria-selected="true" data-tab="preview" class="tab">Preview</button>
-            <button type="button" role="tab" id="tab-raw" aria-controls="panel-raw" aria-selected="false" data-tab="raw" class="tab">SKILL.md</button>
-            <button type="button" class="ml-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium text-muted hover:bg-paper-2 hover:text-ink" data-copy-from="#skill-raw">
-              <Icon name="copy" size={14} /> <span data-copy-label>Copy</span>
-            </button>
+        <!-- TL;DR -->
+        <section aria-labelledby="tldr-title" class="rounded-2xl border border-line bg-card p-6 sm:p-7">
+          <div class="flex items-center gap-2.5">
+            <span class="rounded-md bg-yellow px-2 py-0.5 font-mono text-[0.7rem] font-bold uppercase tracking-wider text-brand-ink">TL;DR</span>
+            <h2 id="tldr-title" class="sr-only">TL;DR</h2>
           </div>
-          <div id="panel-preview" role="tabpanel" aria-labelledby="tab-preview" class="prose prose-lg prose-pid mt-8 min-w-0">
-            <Content />
+          <p class="mt-4 font-display text-xl font-semibold leading-snug tracking-tight sm:text-2xl">{summary}</p>
+          {(tldr.when.length > 0 || tldr.steps.length > 0) && (
+            <div class="mt-6 grid gap-6 border-t border-line pt-6 sm:grid-cols-2 sm:gap-8">
+              {tldr.when.length > 0 && (
+                <div>
+                  <p class="eyebrow">Reach for it when</p>
+                  <ul class="mt-3 space-y-2.5 text-[0.95rem] leading-snug text-ink-2">
+                    {tldr.when.map((w) => (
+                      <li class="flex gap-2.5"><span class="mt-[0.45em] size-1.5 flex-none rounded-full bg-ink"></span><span>{w}</span></li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {tldr.steps.length > 0 && (
+                <div>
+                  <p class="eyebrow">What it does</p>
+                  <ol class="mt-3 space-y-2 text-[0.95rem] leading-snug text-ink-2">
+                    {tldr.steps.map((st, i) => (
+                      <li class="flex gap-3"><span class="grid size-5 flex-none place-items-center rounded-full bg-paper-2 font-mono text-[0.65rem] font-bold text-ink ring-1 ring-line">{i + 1}</span><span>{st}</span></li>
+                    ))}
+                  </ol>
+                </div>
+              )}
+            </div>
+          )}
+        </section>
+
+        <!-- The file itself -->
+        <section class="mt-8" aria-label="SKILL.md">
+          <div class="overflow-hidden rounded-2xl border border-line bg-paper-2">
+            <div class="flex items-center gap-3 border-b border-line bg-card px-4 py-2.5">
+              <span class="flex gap-1.5" aria-hidden="true"><span class="size-2.5 rounded-full bg-red/70"></span><span class="size-2.5 rounded-full bg-yellow"></span><span class="size-2.5 rounded-full bg-lime"></span></span>
+              <span class="font-mono text-xs text-muted">{skill.id}/SKILL.md</span>
+              <span class="ml-auto hidden font-mono text-xs text-muted sm:inline">{lines} lines</span>
+              <button type="button" class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium text-muted hover:bg-paper-2 hover:text-ink" data-copy-from="#skill-raw">
+                <Icon name="copy" size={14} /> <span data-copy-label>Copy</span>
+              </button>
+            </div>
+            <div class="relative" data-file data-collapsed={collapsible ? 'true' : 'false'}>
+              <pre class="file-body whitespace-pre-wrap [overflow-wrap:anywhere] p-5 font-mono text-[0.8rem] leading-relaxed text-ink-2"><code id="skill-raw">{raw}</code></pre>
+              {collapsible && (
+                <div class="file-fade absolute inset-x-0 bottom-0 flex items-end justify-center pb-5">
+                  <button type="button" data-expand class="btn btn-ghost h-10 bg-card px-5 text-sm">
+                    Show full file <span class="text-muted">· {lines} lines</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-          <div id="panel-raw" role="tabpanel" aria-labelledby="tab-raw" hidden class="mt-8">
-            <pre class="max-h-[70vh] overflow-auto rounded-xl border border-line bg-paper-2 p-5 font-mono text-[0.82rem] leading-relaxed text-ink-2"><code id="skill-raw">{raw}</code></pre>
-          </div>
-        </div>
+        </section>
       </div>
 
       <!-- Sidebar -->
       <aside class="order-1 min-w-0 lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1">
-        <div class="lg:sticky lg:top-24">
+        <div>
         <div class="card p-6 shadow-card">
-          <div class="flex items-center justify-between gap-3">
-            <span class="eyebrow">{d.category}</span>
-            <span class="rounded-full bg-yellow px-2.5 py-0.5 text-xs font-bold text-brand-ink">{d.price}</span>
-          </div>
+          <span class="eyebrow">{d.category}</span>
           <h1 class="mt-3 font-display text-3xl font-bold leading-tight tracking-tight">{d.title}</h1>
-          <p class="mt-3 text-ink-2">{d.description}</p>
           <p class="mt-3 text-sm text-muted">by <a href="/manifesto" class="link text-ink">{SITE.name}</a></p>
 
           <div class="mt-6 grid gap-2">
             <button type="button" class="btn btn-primary h-11 w-full" data-copy-from="#skill-raw">
               <Icon name="copy" size={16} /> <span data-copy-label>Copy SKILL.md</span>
             </button>
-            <a href={`/skills/${skill.id}.md`} download="SKILL.md" class="btn btn-ghost h-11 w-full">
-              <Icon name="download" size={16} /> Download
-            </a>
+            <div class="grid grid-cols-2 gap-2">
+              <a href={`/skills/${skill.id}.md`} download="SKILL.md" class="btn btn-ghost h-11 w-full">
+                <Icon name="download" size={16} /> Download
+              </a>
+              <a href={gh.folder} target="_blank" rel="noopener" class="btn btn-ghost h-11 w-full">
+                <Icon name="github" size={16} /> GitHub
+              </a>
+            </div>
           </div>
+
+          <ChatLauncher links={chat} />
 
           <div class="mt-6">
             <p class="text-xs font-semibold text-ink-2">Install in Claude Code</p>
@@ -95,7 +144,7 @@ const meta: [string, string][] = [
                 <Icon name="copy" size={13} />
               </button>
             </div>
-            <p class="mt-2 text-xs leading-relaxed text-muted">ChatGPT, Claude.ai or Cursor: paste the file into project instructions or rules.</p>
+            <p class="mt-2 text-xs leading-relaxed text-muted">ChatGPT, Claude.ai or Cursor: paste the file into project instructions or rules. Source and history on <a href={gh.file} target="_blank" rel="noopener" class="link text-ink-2">GitHub</a>.</p>
           </div>
 
           <dl class="mt-6 divide-y divide-line border-t border-line text-sm">
@@ -127,28 +176,15 @@ const meta: [string, string][] = [
 </Base>
 
 <style>
-  /* The skill's own "# Title" duplicates the sidebar <h1> */
-  #panel-preview > :global(h1:first-child) { display: none; }
-  .tab {
-    position: relative; padding: 0.6rem 0.9rem; font-size: 0.9rem; font-weight: 600; color: var(--muted);
-  }
-  .tab[aria-selected='true'] { color: var(--ink); }
-  .tab[aria-selected='true']::after {
-    content: ''; position: absolute; inset-inline: 0.9rem; bottom: -1px; height: 2px; background: var(--ink);
-  }
+  [data-file][data-collapsed='true'] .file-body { max-height: 30rem; overflow: hidden; }
+  [data-file][data-collapsed='false'] .file-fade { display: none; }
+  .file-fade { height: 9rem; background: linear-gradient(to bottom, transparent, var(--paper-2) 70%); }
 </style>
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-tab]')];
-    tabs.forEach((t) =>
-      t.addEventListener('click', () => {
-        tabs.forEach((x) => {
-          const on = x === t;
-          x.setAttribute('aria-selected', String(on));
-          document.getElementById(x.getAttribute('aria-controls')!)!.hidden = !on;
-        });
-      }),
+    document.querySelectorAll<HTMLButtonElement>('[data-expand]').forEach((b) =>
+      b.addEventListener('click', () => b.closest<HTMLElement>('[data-file]')!.dataset.collapsed = 'false'),
     );
   });
 </script>

@@ -26,6 +26,17 @@ function score(item: Item, q: string): number {
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 
+type PostHogClient = {
+  capture: (event: string, properties?: Record<string, string>) => void;
+  logger?: {
+    info: (message: string, attributes?: Record<string, string>) => void;
+  };
+};
+
+function logPostHog(message: string, attributes?: Record<string, string>) {
+  (window as Window & { posthog?: PostHogClient }).posthog?.logger?.info(message, attributes);
+}
+
 type Api = { open: () => void; close: () => void; isOpen: () => boolean };
 const apis = new WeakMap<HTMLDialogElement, Api>();
 
@@ -75,16 +86,29 @@ function bind(): Api | undefined {
     render();
   };
   const close = () => dialog.close();
+  const selectResult = (result: Item) => {
+    (window as Window & { posthog?: PostHogClient }).posthog?.capture(
+      'site_search_result_selected',
+      { result_type: result.type },
+    );
+    logPostHog('site search result selected', { result_type: result.type });
+    close();
+    navigate(result.url);
+  };
 
   input.addEventListener('input', () => { active = 0; render(); });
   input.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % Math.max(1, results.length); render(); }
     else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active - 1 + results.length) % Math.max(1, results.length); render(); }
-    else if (e.key === 'Enter' && results[active]) { e.preventDefault(); close(); navigate(results[active].url); }
+    else if (e.key === 'Enter' && results[active]) { e.preventDefault(); selectResult(results[active]); }
   });
   list.addEventListener('click', (e) => {
-    const a = (e.target as HTMLElement).closest('a');
-    if (a) { e.preventDefault(); close(); navigate(a.getAttribute('href')!); }
+    const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[data-i]');
+    const resultIndex = Number(a?.dataset.i);
+    if (a && Number.isInteger(resultIndex) && results[resultIndex]) {
+      e.preventDefault();
+      selectResult(results[resultIndex]);
+    }
   });
   dialog.addEventListener('click', (e) => { if (e.target === dialog) close(); });
 

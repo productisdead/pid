@@ -1,5 +1,5 @@
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 /**
@@ -38,7 +38,6 @@ const skillMeta = z.object({
   tools: z.array(z.string()).default(['Claude', 'ChatGPT', 'Cursor']),
   level: z.enum(['beginner', 'intermediate', 'advanced']).default('beginner'),
   version: z.string().default('1.0'),
-  price: z.string().default('Free'),
   date: z.coerce.date(),
   updated: z.coerce.date().optional(),
   featured: z.boolean().default(false),
@@ -61,4 +60,24 @@ const skills = defineCollection({
     .transform(({ name, description, metadata }) => ({ name, description, ...metadata })),
 });
 
-export const collections = { posts, skills };
+/**
+ * Recommended skills: other people's skills I've used and vouch for.
+ * Edit src/content/recommended/skills.yaml. The YAML key is the id.
+ */
+const recommended = defineCollection({
+  loader: file('./src/content/recommended/skills.yaml'),
+  schema: z.object({
+    title: z.string(),
+    author: z.string(),
+    url: z.url(),
+    category: z.string(),
+    summary: z.string(),
+    why: z.string().optional(),
+    icon: z.string().default('✦'),
+    tools: z.array(z.string()).default(['Claude']),
+    date: z.coerce.date(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { posts, skills, recommended };

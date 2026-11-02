@@ -13,7 +13,6 @@ metadata:
   tools: [Claude, ChatGPT, Cursor]
   level: beginner                # beginner | intermediate | advanced
   version: "1.0"
-  price: Free
   date: 2026-11-01
   featured: false
   draft: true

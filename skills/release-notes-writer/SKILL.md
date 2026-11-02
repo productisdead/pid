@@ -1,6 +1,6 @@
 ---
 name: release-notes-writer
-description: Converts a messy changelog, PR list or ticket dump into release notes that users actually read. Benefits first, jargon never.
+description: Turns a changelog, PR list or ticket dump into short, benefit-first release notes users actually read. Use when asked for release notes, what's new or a changelog entry.
 metadata:
   title: Release Notes Writer
   category: Shipping

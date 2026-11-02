@@ -1,12 +1,12 @@
 ---
 name: product-vision
-description: Builds, rewrites or reviews a holistic product vision asset that tells one traceable story, from "why does anyone care" to "what we ship this quarter" (job → problems → counters → Hooked loop → key results → proof). Use when the user wants to create or critique a product vision, vision deck or strategy narrative, asks how to tell their product's story end to end, wants to connect customer problems to the roadmap or OKRs, or wants to apply Nir Eyal's Hooked model (trigger, action, variable reward, investment) to a product strategy. Not for reviewing a single feature spec or decomposing one metric.
+description: Builds or reviews a product vision as one traceable story, from the customer's job to what ships this quarter, with a Hooked habit loop in the middle. Use for vision decks, strategy narratives or tying problems to the roadmap.
 metadata:
   title: Product Vision
   category: Strategy
   icon: 🧭
   color: teal
-  tags: [vision, strategy, narrative, jobs-to-be-done, hooked, okrs, deck]
+  tags: [vision, strategy, narrative, jobs-to-be-done, hooked, okrs, deck, ai]
   level: advanced
   date: 2026-11-01
 ---
@@ -21,6 +21,7 @@ You are a product leader writing the one asset that explains the whole product: 
 - **Rewrite**: an existing vision, pitch or strategy doc that sprawls, contradicts itself or doesn't reach the roadmap
 - **Review**: "critique our vision", "does our roadmap connect to our problems?"
 - **Hooked**: "apply the Hooked model to our strategy", "why don't users come back?"
+- **AI product**: "what's our AI strategy?", a vision where a model does the core work (add the AI lens below)
 
 Not this skill: a single feature spec (use a PRD review), one metric's breakdown (use a metric tree), a competitor deep-dive (use a teardown). If the user only wants the Hooked loop, run Step 1 for the loop's inputs and write section 11 alone.
 
@@ -90,7 +91,7 @@ For each segment: a named example customer, a number (count, ARR, usage share) a
 → *Where does it break for them today?*
 
 **4. Problems, max 3: *Where does it break today?***
-One block per problem. Give the pattern a two-to-four-word name ("The Monday scramble"). Add one real quote, attributed, that shows **it hurts**. Add one real number that shows **it's a pattern**, not an anecdote. Add today's workaround. Rank the problems by frequency × severity. If you have five, two are symptoms of the others or belong to another job: merge or cut.
+One block per problem. Give the pattern a two-to-four-word name ("The Monday scramble"). Add one real quote, attributed, that shows **it hurts**. Add one real number that shows **it's a pattern**, not an anecdote. Add today's workaround and the **stakes**: what it costs in time, money, trust or missed opportunity. Rank the problems by frequency × severity. If you have five, two are symptoms of the others or belong to another job: merge or cut.
 → *Why hasn't this been solved, and why now?*
 
 **5. Why now: *Why is this the moment?***
@@ -240,6 +241,31 @@ Ask two questions: *Would the team use this product itself?* and *Does it materi
 
 If the product isn't a Facilitator, say so in plain words. Never design a loop that depends on hiding how to cancel, fake scarcity, or notifications the user didn't opt into. Pair every engagement KR with a guardrail.
 
+## If the product runs on AI
+
+Apply this lens whenever a counter, the loop or the moat depends on a model. It adds no sections. It hardens the ones you have.
+
+### Principles
+
+- **Start with the problem, not the AI.** This is the "problem-first" approach Aishwarya Naresh Reganti and Kiriti Badam teach. The model is a mechanism inside a counter, never the counter itself. Test: rewrite the counter without the word "AI". If nothing is left, it was never a counter. If you can't name the P-number the model serves, it's off-spine.
+- **Design for squishiness.** Model output is probabilistic, so the failure path is part of the product. Alex Komoroske's point, paraphrased: even at 99% accuracy, a product that punches the user in the face the other 1% of the time isn't viable. Design for the cost of a miss, not the average. Show what the user sees when the model is wrong, how they notice, and how they recover.
+- **Flywheels beat first-mover advantage.** Reganti's point, paraphrased: being first to ship an agent matters less than building the flywheel that makes it better with use. Competitors can rent the same model. They can't rent your loop. Every accept, reject, correction and human edit is stored value (investment phase) that improves the next output, and that's the real moat in section 9.
+
+### Questions to add to the Step 1 ask
+
+1. **What specific user problem are you solving with AI?** The answer is a P-number.
+2. **What should the AI decide, and what should a human decide?** Map the split onto the roles in section 7. Start where impact is low and human control is high, then widen autonomy as the evidence comes in.
+3. **How will you handle the 5% of cases where the AI fails?** Cover detection, fallback, recovery, and who bears the cost of the miss.
+
+### Common mistakes to flag
+
+| Mistake | What it looks like | Fix |
+| --- | --- | --- |
+| AI for AI's sake | "AI-powered" on the cover or in a counter, with no P-number behind it | Name the problem it serves, or cut it |
+| Single-model thinking | The plan assumes one model, one call, one right answer; the moat is "we use the best model" | Treat the model as one component, next to data, rules, evals and people. The vision should survive a model swap. |
+| Ignoring the failures | Only the happy path is shown, with no error rate, fallback or eval | Add the failure path to the counter, an error-cost guardrail KR, and evals to the proof |
+| Over-automation | The AI acts where a human should decide, or the user can't see, undo or override it | Keep high-stakes calls human and earn autonomy step by step. Users who lose control leave, the same autonomy rule as the variable reward. |
+
 ### Writing section 11
 
 | Phase | This product (user's words where possible) | Metric: today → target | Traces to |
@@ -307,6 +333,17 @@ Pass 1: … · Pass 2: … · Still blocked on: …
 
 **Visual asset.** Build a deck, page or one-pager only after the review loop passes, and only from the outline. Use one slide per block, with the headline as the slide title. On problem slides, the quote and the number are the biggest things on the page. Show the loop as a four-phase diagram filled with this product's specifics. Don't add claims in the visual that aren't in the outline.
 
+**The deck.** Open with three beats before you show the product. Each one is built from sections the outline already has:
+
+1. **Status quo:** *What does the world look like today?* The job and how people get it done now (sections 2–3). Describe it neutrally, as something the audience will recognise.
+2. **Pain:** *Why is that a real problem for real people?* The problems (section 4). Each one gets a named person, their quote and the number that shows it's a pattern.
+3. **Stakes:** *What does it cost?* Measure it in time, money, trust and missed opportunity, each with a number and a source. Stakes turn a problem into a reason to act now.
+
+Then the rest of the story:
+- **The killer line.** The cover line, sharpened until people repeat it. A strong pattern is *a benefit people already know + an experience they can't get today*. Uber's early pitch is the classic example: the convenience of a New York cab plus the experience of a professional chauffeur. Test the line by asking a stranger to say it back.
+- **Unit economics.** Show the math, don't just state a market size: *if we serve X% of [segment], that's N customers × $P = $Y in revenue*. Build it bottom-up from segment counts (section 3) and tier prices (section 8). Every input is a real number or a labelled assumption. A big TAM with no path to it is decoration.
+- **Make it feel inevitable.** By the last slide, the audience should feel this is going to happen and the only question is who builds it. That feeling comes from evidence, not adjectives: stakes that are rising, a why-now shift that has already started (section 5), proof that it works (section 13), and a moat that compounds (section 9).
+
 **Review mode.** Map the existing asset onto the spine first, then run the review loop against it. Report:
 - the spine as it stands, with gaps
 - sections that could go without anyone noticing
@@ -336,7 +373,8 @@ Don't hand over the first draft. Review it, fix it, and review again.
 - [ ] Cover: promise, mechanism and horizon, repeatable by a stranger
 - [ ] Job: "isn't X, isn't Y, it's Z", with a job statement and functional, emotional and social dimensions
 - [ ] Segments are named with evidence, plus who it's not for
-- [ ] ≤ 3 problems, each with a named pattern, an attributed quote (pain) and a number (pattern)
+- [ ] ≤ 3 problems, each with a named pattern, an attributed quote (pain), a number (pattern) and the stakes (cost)
+- [ ] Decks: status quo → pain → stakes come before the product; the unit-economics math is shown and every input is sourced
 - [ ] Why now rests on evidence (a behaviour, technology or interface shift), plus why us
 - [ ] Exactly one one-word counter per problem, passing the inversion test, with a proof metric and target
 - [ ] Alternatives include build-it-yourself and doing nothing; the moat says what compounds
@@ -349,6 +387,7 @@ Don't hand over the first draft. Review it, fix it, and review again.
 - [ ] KRs are outcomes with baseline, target and date, each tagged to a C# or loop phase
 - [ ] Every roadmap item traces to a KR, and anything that doesn't is listed as Off-spine
 - [ ] The riskiest assumption is named, with a test and a change-course result
+- [ ] AI products: every model use traces to a P#, the AI-vs-human split is stated, the failure path has a guardrail KR, and the flywheel appears in investment and moat
 - [ ] Removal test: every section would be missed if cut
 - [ ] Nothing is invented. Weak evidence and hypotheses are labelled.
 

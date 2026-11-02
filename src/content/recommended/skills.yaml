@@ -1,0 +1,154 @@
+# Skills by other people that I've actually used and recommend.
+# One entry per skill. The key (e.g. `frontend-design`) is the id.
+# `category` is shared with your own skills on /skills. Reuse an existing one
+# where it fits: Strategy, Research, Analytics, Shipping, Design, Frontend,
+# Marketing, Security, Writing, Workflow. A new one adds a filter chip.
+#
+# Fields:
+#   title     Display name
+#   author    Who made it
+#   url       Where to get it (repo, folder or page)
+#   category  Filter chip it appears under
+#   summary   What it does, one or two sentences
+#   why       Your take: why you recommend it, after using it (optional, but say something)
+#   icon      Emoji (optional, default ✦)
+#   tools     Where it works (optional, default [Claude])
+#   date      When you added it (used by the Newest sort)
+#   draft     true = only visible in `npm run dev`
+#
+# The two `draft: true` entries at the bottom are examples to show the layout. They're drafts,
+# so they won't ship until you write your own `why` and remove `draft: true`.
+
+emil-design-eng:
+  title: Design Engineering
+  author: Emil Kowalski
+  url: https://github.com/emilkowalski/skills/blob/main/skills/emil-design-eng/SKILL.md
+  category: Design
+  summary: Emil Kowalski's rules for UI polish and motion. When to animate at all, which easing and duration to use, press and popover details, and keeping animations interruptible, performant and reduced-motion friendly.
+  icon: 🎞️
+  tools: [Claude]
+  date: 2026-11-02
+
+animate:
+  title: Animate
+  author: Emil Kowalski
+  url: https://github.com/emilkowalski/skills/tree/main/skills/animate
+  category: Design
+  summary: Turns "animate this" into working motion code. Decides first whether it should move at all, then picks the cheapest tool (CSS before Motion), the curve and the duration, and ships reduced-motion support with it. Comes with recipes for toasts, drawers, modals and more.
+  icon: 🌀
+  tools: [Claude]
+  date: 2026-11-02
+
+build-awwwards-quality-sites:
+  title: Build Awwwards-Quality Sites
+  author: Meng To
+  url: https://github.com/MengTo/Skills/tree/main/agent-skills/web-design/build-awwwards-quality-sites
+  category: Design
+  summary: Art-directs and builds motion-led marketing, portfolio and landing sites. Writes a visual direction before any code, then implements it with GSAP, a single smooth-scroll engine and Three.js only where it earns its place, with honest assets and reduced-motion, mobile and keyboard checks.
+  icon: 🏆
+  tools: [Claude]
+  date: 2026-11-02
+
+shadcn:
+  title: shadcn/ui
+  author: shadcn
+  url: https://github.com/shadcn-ui/ui/tree/main/skills/shadcn
+  category: Design
+  summary: Teaches the agent to work with shadcn/ui the way it's meant to be used. It searches registries and reads the docs before writing code, adds components through the CLI, sticks to semantic colors and the composition rules for forms, dialogs and cards, and never overwrites your customizations without asking.
+  icon: 🧱
+  tools: [Claude]
+  date: 2026-11-02
+
+tailwind-design-system:
+  title: Tailwind Design System
+  author: Seth Hobson
+  url: https://github.com/wshobson/agents/tree/main/plugins/frontend-mobile-development/skills/tailwind-design-system
+  category: Frontend
+  summary: Sets up a design system the Tailwind CSS v4 way, configured in CSS rather than JavaScript. It defines semantic color, radius and animation tokens in @theme, handles dark mode by overriding the same tokens, and builds components in a fixed order of base, variants, sizes and states.
+  icon: 🎛️
+  tools: [Claude]
+  date: 2026-11-02
+
+threejs-skills:
+  title: Three.js Skills
+  author: CloudAI-X
+  url: https://github.com/CloudAI-X/threejs-skills
+  category: Frontend
+  summary: A pack of 13 skills covering the whole Three.js pipeline, from scene setup, materials, lighting and shaders to glTF loading, post-processing, performance and React Three Fiber. Written for current three.js (r186) with WebGPU/TSL sections, and each skill flags outdated APIs the agent would otherwise reach for.
+  icon: 🧊
+  tools: [Claude]
+  date: 2026-11-02
+
+ui-skills:
+  title: UI Skills
+  author: Julien Thibeaut
+  url: https://github.com/ibelick/ui-skills
+  category: Design
+  summary: A pack of 9 skills for design engineers. Baseline UI strips the slop out of generated interfaces (spacing, hierarchy, type, no unasked-for gradients or animation). The rest audit and fix accessibility, metadata and motion performance, write a DESIGN.md from an existing product, and build canvases for exploring components.
+  icon: 🧹
+  tools: [Claude]
+  date: 2026-11-02
+
+seo-audit:
+  title: SEO Audit
+  author: Corey Haines
+  url: https://github.com/coreyhaines31/marketingskills/tree/main/skills/seo-audit
+  category: Marketing
+  summary: Runs an SEO audit in priority order, from crawlability and indexation to technical foundations, on-page, content quality and authority. Every finding comes with impact, evidence and a fix, and the result is a tiered action plan of critical fixes, quick wins and long-term work.
+  icon: 🔎
+  tools: [Claude]
+  date: 2026-11-02
+
+humanizer:
+  title: Humanizer
+  author: Siqi Chen
+  url: https://github.com/blader/humanizer
+  category: Writing
+  summary: Rewrites AI-sounding text so it reads like the person who wrote it, without changing what it says. It hunts 26 tells drawn from Wikipedia's "Signs of AI writing", such as not-X-but-Y contrasts, one-line closers, forced triads, stock words and dashes everywhere, then checks the rewrite against the original so no facts get added or lost.
+  icon: ✍️
+  tools: [Claude, Codex, Cursor]
+  date: 2026-11-02
+
+security-best-practices:
+  title: Security Best Practices
+  author: OpenAI
+  url: https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices
+  category: Security
+  summary: Reviews a codebase for security against framework-specific checklists for Python (Django, FastAPI, Flask), JavaScript/TypeScript (Express, Next.js, React, Vue) and Go. It writes secure-by-default code, flags critical issues as it works, or produces a full prioritized report and then offers fixes one finding at a time.
+  icon: 🔐
+  tools: [Codex]
+  date: 2026-11-02
+
+ponytail:
+  title: Ponytail
+  author: DietrichGebert
+  url: https://github.com/DietrichGebert/ponytail
+  category: Workflow
+  summary: Makes your coding agent think like the laziest senior dev in the room. Before writing anything it climbs a ladder (does this need to exist, is it already in the codebase, the standard library, an installed dependency) and only then writes the minimum code that works. Comes with review and audit commands that rank findings from must-fix down.
+  icon: 🐴
+  tools: [Claude, Codex, Cursor]
+  date: 2026-11-02
+
+frontend-design:
+  title: Frontend Design
+  author: Anthropic
+  url: https://github.com/anthropics/skills/tree/main/skills/frontend-design
+  category: Design
+  summary: Pushes the agent away from generic, template-looking UI toward interfaces with a clear aesthetic direction, real typography and intentional layout.
+  why: "TODO: your take after using it."
+  icon: 🎨
+  tools: [Claude]
+  date: 2026-11-02
+  draft: true
+
+skill-creator:
+  title: Skill Creator
+  author: Anthropic
+  url: https://github.com/anthropics/skills/tree/main/skills/skill-creator
+  category: Workflow
+  summary: Interviews you about a repeatable task and turns the answers into a working SKILL.md, then helps you test and tighten it.
+  why: "TODO: your take after using it."
+  icon: 🛠️
+  tools: [Claude]
+  date: 2026-11-02
+  draft: true
