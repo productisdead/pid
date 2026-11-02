@@ -109,16 +109,16 @@ const debate = [
         <a href="/writing" class="link hidden shrink-0 items-center gap-2 font-semibold sm:inline-flex">All writing <Icon name="arrow" size={16} /></a>
       </div>
 
-      <a data-reveal href={`/writing/${featured.id}`} class="group relative mt-10 block overflow-hidden rounded-3xl bg-ink p-8 text-paper sm:p-12">
+      <a data-reveal href={`/writing/${featured.id}`} class="group relative mt-10 block overflow-hidden rounded-3xl bg-invert p-8 text-invert-ink ring-1 ring-line sm:p-12">
         <div class="pointer-events-none absolute -right-24 -top-24 hidden size-96 rounded-full bg-yellow/90 md:block transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-110"></div>
         <img src="/brand/cat.svg" alt="" width="363" height="316" loading="lazy" class="pointer-events-none absolute -right-6 -top-4 hidden w-72 rotate-[-8deg] transition-transform duration-700 ease-[var(--ease-spring)] group-hover:rotate-0 group-hover:scale-105 md:block" />
         <div class="relative max-w-2xl">
-          <div class="flex flex-wrap items-center gap-3 text-sm text-paper/70">
+          <div class="flex flex-wrap items-center gap-3 text-sm text-invert-ink/70">
             <Stance stance={featured.data.stance} class="!bg-yellow !text-brand-ink" />
             <span class="font-mono text-xs">Featured · {formatDate(featured.data.date)} · {readingTime(featured.body)} min read</span>
           </div>
           <h3 class="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-tight sm:text-6xl" transition:name={`post-title-${featured.id}`}>{featured.data.title}</h3>
-          <p class="mt-5 max-w-xl text-lg text-paper/75">{featured.data.description}</p>
+          <p class="mt-5 max-w-xl text-lg text-invert-ink/75">{featured.data.description}</p>
           <span class="mt-8 inline-flex items-center gap-2 font-semibold text-yellow">
             Read the essay <Icon name="arrow" size={16} class="transition-transform group-hover:translate-x-1" />
           </span>

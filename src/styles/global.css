@@ -25,21 +25,35 @@
   --lime: #c5e17a;
   --red: #e4572e;
   --shadow: 0 1px 0 rgb(20 17 18 / 0.04), 0 12px 32px -12px rgb(20 17 18 / 0.18);
+  /* Feature panels that stay dark in both themes (featured card, marquee, ink tiles) */
+  --invert: #141112;
+  --invert-ink: #faf8f3;
+  /* Neo-brutal offset shadows / outlines */
+  --hard: #141112;
   color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --paper: #121011;
-  --paper-2: #1a1718;
-  --card: #1d191b;
-  --ink: #f5f5f5;
-  --ink-2: #d9d9d9;
-  --muted: #a39c9e;
-  --line: rgb(245 245 245 / 0.09);
-  --line-strong: rgb(245 245 245 / 0.2);
+  --paper: #131112;
+  --paper-2: #1c191a;
+  --card: #211d1f;
+  --ink: #f3efe7;
+  --ink-2: #d4cec5;
+  --muted: #a8a0a2;
+  --line: rgb(243 239 231 / 0.1);
+  --line-strong: rgb(243 239 231 / 0.22);
+  /* Accents: slightly softened so they don't glare on a dark page */
+  --yellow: #f7d04e;
   --yellow-soft: #3a3115;
-  --teal: #3d7187;
+  --orange: #eb9a5c;
+  --teal: #3a6c82;
+  --pink: #c9adbb;
+  --lime: #b7d46e;
+  --red: #f26a44;
   --shadow: 0 1px 0 rgb(0 0 0 / 0.3), 0 16px 40px -16px rgb(0 0 0 / 0.7);
+  --invert: #2a2527;
+  --invert-ink: #f5f1ea;
+  --hard: #4d4648;
   color-scheme: dark;
 }
 
@@ -59,6 +73,9 @@
   --color-pink: var(--pink);
   --color-lime: var(--lime);
   --color-red: var(--red);
+  --color-invert: var(--invert);
+  --color-invert-ink: var(--invert-ink);
+  --color-hard: var(--hard);
   --color-brand-ink: #141112;
 
   --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
@@ -146,9 +163,9 @@
   .btn-yellow {
     @apply text-brand-ink;
     background: var(--yellow);
-    box-shadow: 0 0 0 0 var(--ink);
+    box-shadow: 0 0 0 0 var(--hard);
   }
-  .btn-yellow:hover { box-shadow: 4px 4px 0 0 var(--ink); transform: translate(-2px, -2px); }
+  .btn-yellow:hover { box-shadow: 4px 4px 0 0 var(--hard); transform: translate(-2px, -2px); }
   .btn-ghost {
     @apply border border-line-strong text-ink hover:bg-paper-2;
   }
@@ -171,16 +188,23 @@
 
   /* Highlighter-marker effect. Animates in when revealed. */
   .marker {
-    background-image: linear-gradient(100deg, transparent 0.25em, var(--yellow) 0.25em, var(--yellow) calc(100% - 0.15em), transparent calc(100% - 0.15em));
+    --marker-color: var(--yellow);
+    --marker-h: 0.42em;
+    background-image: linear-gradient(100deg, transparent 0.25em, var(--marker-color) 0.25em, var(--marker-color) calc(100% - 0.15em), transparent calc(100% - 0.15em));
     background-repeat: no-repeat;
-    background-size: 100% 0.42em;
+    background-size: 100% var(--marker-h);
     background-position: 0 88%;
     padding-inline: 0.08em;
     margin-inline: -0.08em;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
   }
-  [data-theme="dark"] .marker { background-size: 100% 0.32em; }
+  /* Dark mode: a translucent wash behind the whole word, so light text never sits on solid yellow */
+  [data-theme="dark"] .marker {
+    --marker-color: rgb(247 208 78 / 0.26);
+    --marker-h: 0.82em;
+    background-position: 0 62%;
+  }
 
   /* Hand-drawn strike-through */
   .strike { position: relative; display: inline-block; white-space: nowrap; }
@@ -222,9 +246,9 @@
   /* Skill cover color variants */
   .tone-yellow { --tone: var(--yellow); --tone-ink: #141112; }
   .tone-orange { --tone: var(--orange); --tone-ink: #141112; }
-  .tone-teal { --tone: #264653; --tone-ink: #f5f5f5; }
+  .tone-teal { --tone: var(--teal); --tone-ink: #f5f5f5; }
   .tone-pink { --tone: var(--pink); --tone-ink: #141112; }
-  .tone-ink { --tone: #141112; --tone-ink: #f5f5f5; }
+  .tone-ink { --tone: var(--invert); --tone-ink: #f5f5f5; }
   .tone-lime { --tone: var(--lime); --tone-ink: #141112; }
 }
 
@@ -242,10 +266,10 @@
 
   .marker[data-reveal] {
     opacity: 1; transform: none;
-    background-size: 0% 0.42em;
+    background-size: 0% var(--marker-h);
     transition: background-size 0.9s var(--ease-out-expo) 0.2s;
   }
-  .marker[data-reveal].is-visible { background-size: 100% 0.42em; }
+  .marker[data-reveal].is-visible { background-size: 100% var(--marker-h); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -310,6 +334,7 @@
   @apply relative rounded-xl border border-line text-[0.88rem] leading-relaxed;
 }
 .prose-pid :where(img) { @apply rounded-xl border border-line; }
+[data-theme="dark"] .prose-pid :where(img) { filter: brightness(0.88); }
 .prose-pid :where(hr) {
   border: 0; height: 1.5rem; margin-block: 3rem;
   background: center / 1.5rem no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext x='12' y='17' text-anchor='middle' font-size='16'%3E☠%3C/text%3E%3C/svg%3E");

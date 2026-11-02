@@ -1,0 +1,115 @@
+---
+/**
+ * "Use it in a chat" launcher: a dark panel with the exact prompt we send,
+ * plus branded tiles that open it in Claude, ChatGPT or Cursor (or copy it).
+ */
+interface Props {
+  links: { prompt: string; claude: string; chatgpt: string; cursor: string };
+}
+const { links } = Astro.props;
+
+const tiles = [
+  { id: 'claude', label: 'Claude', href: links.claude },
+  { id: 'chatgpt', label: 'ChatGPT', href: links.chatgpt },
+  { id: 'cursor', label: 'Cursor', href: links.cursor },
+] as const;
+---
+<div class="launcher mt-6 rounded-2xl bg-invert p-1.5 text-invert-ink ring-1 ring-line">
+  <div class="flex items-center justify-between gap-3 px-2.5 pb-2 pt-1.5">
+    <p class="flex items-center gap-2 text-xs font-semibold">
+      <span class="relative flex size-2">
+        <span class="absolute inline-flex size-full animate-ping rounded-full bg-lime opacity-60"></span>
+        <span class="relative inline-flex size-2 rounded-full bg-lime"></span>
+      </span>
+      Use it in a chat
+    </p>
+    <span class="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-invert-ink/45">No install</span>
+  </div>
+
+  <div class="relative rounded-xl bg-white/[0.04] p-3 ring-1 ring-white/10">
+    <p class="font-mono text-[0.68rem] leading-relaxed text-invert-ink/65 [overflow-wrap:anywhere]">
+      <span class="select-none text-yellow">›</span> {links.prompt}<span class="caret" aria-hidden="true"></span>
+    </p>
+  </div>
+
+  <p class="px-2.5 pb-1.5 pt-3 text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-invert-ink/45">Open in</p>
+  <div class="grid grid-cols-2 gap-1.5">
+    {tiles.map((t) => (
+      <a href={t.href} target="_blank" rel="noopener" class="tile group" data-chat={t.id}>
+        <span class="flex items-center gap-2">
+          <span class="logo">
+            {t.id === 'claude' && (
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><g stroke="#D97757" stroke-width="2.6" stroke-linecap="round">
+                <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4M7.5 3.8l9 16.4M16.5 3.8l-9 16.4M3.8 7.5l16.4 9M20.2 7.5l-16.4 9" opacity=".95" />
+              </g><circle cx="12" cy="12" r="3.2" fill="#D97757" /></svg>
+            )}
+            {t.id === 'chatgpt' && (
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                {[0, 60, 120, 180, 240, 300].map((r) => (
+                  <rect x="9" y="2.6" width="6" height="11" rx="3" transform={`rotate(${r} 12 12)`} />
+                ))}
+              </svg>
+            )}
+            {t.id === 'cursor' && (
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                <path d="M12 2 20.7 7v10L12 22 3.3 17V7z" fill="currentColor" opacity=".18" />
+                <path d="M12 2 20.7 7v10L12 22 3.3 17V7zM3.3 7 12 12l8.7-5M12 12v10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+              </svg>
+            )}
+          </span>
+          <span>{t.label}</span>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    ))}
+    <button type="button" class="tile group" data-copy={links.prompt} data-copy-source="chat_prompt">
+      <span class="flex items-center gap-2">
+        <span class="logo">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg>
+        </span>
+        <span data-copy-label>Copy prompt</span>
+      </span>
+    </button>
+  </div>
+
+  <p class="px-2.5 pb-1.5 pt-2.5 text-[0.7rem] leading-relaxed text-invert-ink/50">
+    Loads this skill from its URL, so web access needs to be on. No web access? Copy the file in instead.
+  </p>
+</div>
+
+<style>
+  .tile {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+    min-height: 2.6rem; padding: 0.4rem 0.6rem 0.4rem 0.45rem;
+    border-radius: 0.7rem; font-size: 0.8rem; font-weight: 600; text-align: left;
+    background: rgb(255 255 255 / 0.06); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+    transition: background 0.25s, box-shadow 0.25s, transform 0.25s var(--ease-spring);
+  }
+  .tile:hover {
+    background: rgb(255 255 255 / 0.11); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.18);
+    transform: translateY(-1px);
+  }
+  .tile:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+  .logo {
+    display: grid; place-items: center; width: 1.6rem; height: 1.6rem; flex: none;
+    border-radius: 0.5rem; background: rgb(255 255 255 / 0.08);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+    transition: background 0.25s;
+  }
+  .tile:hover .logo { background: var(--yellow); color: #141112; }
+  .tile[data-chat='claude']:hover .logo { background: #f5e1d8; }
+  .arrow {
+    font-size: 0.95rem; line-height: 1; opacity: 0.45;
+    transition: opacity 0.25s, transform 0.25s var(--ease-spring);
+  }
+  .tile:hover .arrow { opacity: 1; transform: translate(2px, -2px); }
+  .caret {
+    display: inline-block; width: 0.45em; height: 1em; margin-left: 2px; vertical-align: -0.15em;
+    background: var(--yellow); animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .caret, .launcher :global(.animate-ping) { animation: none; }
+    .tile, .tile:hover, .tile:hover .arrow { transform: none; }
+  }
+</style>

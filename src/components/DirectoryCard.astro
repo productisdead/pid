@@ -1,0 +1,100 @@
+---
+/**
+ * One card shape for every skill in the /skills directory, whether it was
+ * made here (links to its page) or recommended (links out to the source).
+ */
+import type { Skill, Recommended } from '@/lib/content';
+import Icon from './Icon.astro';
+import { SITE } from '@/site.config';
+
+type Props =
+  | { kind: 'own'; skill: Skill; index?: number }
+  | { kind: 'rec'; pick: Recommended; index?: number };
+
+const props = Astro.props;
+const index = props.index ?? 0;
+const own = props.kind === 'own';
+
+const d = own
+  ? {
+      id: props.skill.id,
+      title: props.skill.data.title,
+      author: SITE.name,
+      description: props.skill.data.description,
+      category: props.skill.data.category,
+      icon: props.skill.data.icon,
+      tone: props.skill.data.color,
+      tools: props.skill.data.tools,
+      tags: props.skill.data.tags,
+      date: props.skill.data.date,
+      featured: props.skill.data.featured,
+      why: undefined as string | undefined,
+      href: `/skills/${props.skill.id}`,
+    }
+  : {
+      id: props.pick.id,
+      title: props.pick.data.title,
+      author: props.pick.data.author,
+      description: props.pick.data.summary,
+      category: props.pick.data.category,
+      icon: props.pick.data.icon,
+      tone: undefined,
+      tools: props.pick.data.tools,
+      tags: [] as string[],
+      date: props.pick.data.date,
+      featured: false,
+      why: props.pick.data.why,
+      href: props.pick.data.url,
+    };
+---
+<li
+  data-reveal
+  style={`--d:${index % 6}`}
+  data-item
+  data-source={own ? 'own' : 'rec'}
+  data-category={d.category}
+  data-title={d.title.toLowerCase()}
+  data-haystack={`${d.title} ${d.author} ${d.description} ${d.why ?? ''} ${d.category} ${d.tags.join(' ')} ${d.tools.join(' ')} ${d.id}`.toLowerCase()}
+  data-date={d.date.valueOf()}
+  data-featured={d.featured ? '1' : '0'}
+>
+  <a
+    href={d.href}
+    {...(!own && { target: '_blank', rel: 'noopener' })}
+    class="card group flex h-full flex-col p-5 transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-card"
+  >
+    <div class="flex items-start gap-3.5">
+      <span
+        class:list={[
+          'grid size-11 shrink-0 place-items-center rounded-xl text-2xl',
+          own ? `tone-${d.tone} bg-[var(--tone)]` : 'bg-paper-2 ring-1 ring-line',
+        ]}
+        aria-hidden="true"
+      >{d.icon}</span>
+      <div class="min-w-0 flex-1">
+        <h3 class="truncate font-display text-[1.05rem] font-semibold tracking-tight">{d.title}</h3>
+        <p class="mt-0.5 truncate text-sm text-muted">by {d.author}</p>
+      </div>
+    </div>
+
+    <p class="mt-4 line-clamp-3 text-sm leading-relaxed text-ink-2">{d.description}</p>
+
+    {d.why && (
+      <p class="mt-3 line-clamp-2 border-l-[3px] border-yellow pl-3 text-sm leading-snug text-ink">
+        <span class="sr-only">Why I recommend it: </span>{d.why}
+      </p>
+    )}
+
+    <div class="mt-auto flex items-center gap-2 pt-5 text-xs">
+      <span class="shrink-0 rounded-full bg-paper-2 px-2.5 py-1 font-medium text-ink-2 ring-1 ring-line">{d.category}</span>
+      <span class="min-w-0 flex-1 truncate text-muted">{d.tools.join(' · ')}</span>
+      {own ? (
+        <span class="shrink-0 rounded-full bg-yellow px-2.5 py-0.5 text-[0.7rem] font-bold text-brand-ink">Original</span>
+      ) : (
+        <span class="inline-flex shrink-0 items-center gap-1 rounded-full border border-line px-2.5 py-0.5 text-[0.7rem] font-semibold text-ink-2">
+          Recommended <Icon name="arrow" size={11} class="-rotate-45 transition-transform group-hover:-translate-y-px group-hover:translate-x-px" />
+        </span>
+      )}
+    </div>
+  </a>
+</li>

@@ -1,6 +1,6 @@
 ---
 name: metric-tree-builder
-description: Decomposes a north-star metric into the input levers a team can actually move, with owners, guardrails and leading indicators.
+description: Breaks a north-star metric into levers a team can move this quarter, each with a leading indicator, guardrail and owner. Use when setting OKRs or asked how to move a metric.
 metadata:
   title: Metric Tree Builder
   category: Analytics

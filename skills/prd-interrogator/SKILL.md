@@ -1,6 +1,6 @@
 ---
 name: prd-interrogator
-description: Stress-tests a spec like a skeptical VP. Finds the riskiest assumption, the missing "no", and the metric that would prove you wrong.
+description: Stress-tests a PRD or spec like a skeptical VP. Finds the bet, the riskiest assumption, the missing "no" and the kill criteria. Use when asked to review or poke holes in a plan.
 metadata:
   title: PRD Interrogator
   category: Strategy

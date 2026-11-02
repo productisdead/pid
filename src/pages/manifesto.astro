@@ -39,19 +39,34 @@ const theses = [
 ---
 <Base title="Manifesto" description="Product is dead. Long live product. Why AI makes product judgment more valuable, not less.">
   <section class="container-x pt-12 sm:pt-20">
-    <div class="grid items-end gap-10 lg:grid-cols-[1.4fr_1fr]">
+    <div class="grid items-center gap-14 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
       <div>
         <p data-reveal class="eyebrow">Manifesto</p>
         <h1 class="mt-4 font-display text-[clamp(3rem,8vw,6.5rem)] font-extrabold leading-[0.92] tracking-[-0.045em]">
           <span data-reveal style="--d:1" class="block">Not dead.</span>
           <span data-reveal style="--d:2" class="block text-muted">Just resting.</span>
         </h1>
+        <div data-reveal style="--d:3" class="mt-8 max-w-xl space-y-4 text-lg leading-relaxed text-ink-2">
+          <p>
+            <span class="hand block text-2xl text-ink">Hi, I'm {SITE.author.name}.</span>
+            I've been the <span class="marker text-ink">first PM at four startups</span>. That's the seat with nothing to hide behind: no process, no template, just a founder, a few engineers and the question of what to build next.
+            These days I advise startups on exactly that question.
+          </p>
+          <p>
+            I've watched "product is dead" trend roughly every eighteen months for a decade. This time the headline comes with a demo, so it feels true.
+            This site is my long-form argument that it isn't. It's built from the cynical take and back.
+          </p>
+        </div>
       </div>
-      <p data-reveal style="--d:3" class="text-lg leading-relaxed text-ink-2">
-        <span class="hand block text-2xl text-ink">hi, I'm {SITE.author.name}.</span>
-        I've watched "product is dead" trend roughly every eighteen months for a decade. This time the headline comes with a demo, so it feels true.
-        This site is my long-form argument that it isn't. It's built from the cynical take and back.
-      </p>
+
+      <figure data-reveal style="--d:2" class="portrait relative mx-auto w-full max-w-[26rem]">
+        <a href="https://linkedin.com/in/talbela" target="_blank" rel="noopener me" class="portrait-link" aria-label="Talk to Tal Belahusky on LinkedIn">
+          <div class="portrait-bg" aria-hidden="true"></div>
+          <img src="/images/about/tal.webp" alt="Tal Belahusky, in a black shirt, smiling" width="596" height="591" fetchpriority="high" decoding="async" class="portrait-img" />
+          <span class="note note-top hand" aria-hidden="true">Say hi! ↓</span>
+          <span class="portrait-cta btn btn-primary" aria-hidden="true"><Icon name="linkedin" /> Let's talk <Icon name="arrow" /></span>
+        </a>
+      </figure>
     </div>
   </section>
 
@@ -92,19 +107,60 @@ const theses = [
 </Base>
 
 <style>
+  /* ---------- About Tal ---------- */
+  .portrait { aspect-ratio: 1 / 1.02; isolation: isolate; transform: rotate(-2.5deg); transition: transform 0.5s var(--ease-spring); }
+  .portrait:hover { transform: rotate(-0.5deg); }
+  .portrait-bg {
+    position: absolute; inset: 14% 4% 0 4%;
+    border-radius: 1.75rem;
+    background:
+      radial-gradient(circle at 1px 1px, rgb(20 17 18 / 0.16) 1.2px, transparent 1.6px) 0 0 / 14px 14px,
+      var(--yellow);
+    border: 1.5px solid var(--hard);
+    box-shadow: 8px 8px 0 0 var(--hard);
+    z-index: -1;
+    transition: transform 0.5s var(--ease-spring), box-shadow 0.3s var(--ease-out-expo);
+  }
+  .portrait-img {
+    position: absolute; bottom: 0; left: 6%; display: block; width: 88%; height: auto;
+    /* sticker outline */
+    filter:
+      drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
+      drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
+      drop-shadow(0 18px 24px rgb(20 17 18 / 0.25));
+    clip-path: inset(-60px -60px 1.5px -60px round 0 0 1.6rem 1.6rem);
+    transition: transform 0.5s var(--ease-spring);
+    transform-origin: 50% 100%;
+  }
+  .portrait:hover .portrait-bg { transform: translate(-3px, -3px); box-shadow: 12px 12px 0 0 var(--hard); }
+  .portrait:hover .portrait-img { transform: translate(-3px, -3px) scale(1.03); }
+  .note { position: absolute; font-size: 1.35rem; line-height: 1.05; color: var(--ink); }
+  .note-top { top: 3%; left: -3%; transform: rotate(-6deg); }
+  .portrait-link { position: absolute; inset: 0; display: block; color: inherit; }
+  .note-top { font-size: 1.75rem; }
+  .portrait-cta {
+    position: absolute; z-index: 1;
+    bottom: -1.1rem; right: 2%;
+    white-space: nowrap;
+    transform: rotate(4deg);
+    box-shadow: 4px 4px 0 0 var(--yellow);
+  }
+  .portrait:hover .portrait-cta { transform: rotate(2deg) translate(-2px, -2px); box-shadow: 6px 6px 0 0 var(--yellow); }
+  .portrait-link:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; border-radius: 1.75rem; }
+
   /* ---------- Thesis tiles ---------- */
   .tile {
     display: grid; place-items: center;
     width: 4.5rem; height: 4.5rem; flex: none;
     border-radius: 1.1rem;
     background: var(--tone); color: var(--tone-ink);
-    border: 1.5px solid var(--ink);
-    box-shadow: 0 0 0 0 var(--ink);
+    border: 1.5px solid var(--hard);
+    box-shadow: 0 0 0 0 var(--hard);
     transform: rotate(-4deg);
     transition: transform 0.45s var(--ease-spring), box-shadow 0.3s var(--ease-out-expo);
   }
   .thesis:nth-child(even) .tile { transform: rotate(3deg); }
-  .thesis:hover .tile { transform: translate(-3px, -3px) rotate(0deg); box-shadow: 5px 5px 0 0 var(--ink); }
+  .thesis:hover .tile { transform: translate(-3px, -3px) rotate(0deg); box-shadow: 5px 5px 0 0 var(--hard); }
   .tone-ink.tile { color: var(--yellow); }
   .tile :global(svg) { overflow: visible; width: 2.6rem; height: 2.6rem; }
 

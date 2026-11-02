@@ -27,9 +27,7 @@
    | `metadata.featured` | Pinned to the top of the catalog |
    | `metadata.draft` | Visible in `npm run dev` only. Remove it to publish. |
 
-4. Add a row to the skills table in [README.md](README.md).
-
-5. Preview it with `npm run dev` at `http://localhost:4321/skills/<name>`, then open a PR. `npm run build` validates every skill's frontmatter.
+4. Preview it with `npm run dev` at `http://localhost:4321/skills/<name>`, then open a PR. `npm run build` validates every skill's frontmatter.
 
 ## Running the site
 

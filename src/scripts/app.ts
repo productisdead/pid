@@ -5,6 +5,25 @@
 
 let cleanups: Array<() => void> = [];
 
+type PostHogClient = {
+  capture: (event: string, properties?: Record<string, string>) => void;
+  logger?: {
+    info: (message: string, attributes?: Record<string, string>) => void;
+  };
+};
+
+function getPostHog() {
+  return (window as Window & { posthog?: PostHogClient }).posthog;
+}
+
+function capture(event: string, properties?: Record<string, string>) {
+  getPostHog()?.capture(event, properties);
+}
+
+function logPostHog(message: string, attributes?: Record<string, string>) {
+  getPostHog()?.logger?.info(message, attributes);
+}
+
 function onPage(fn: () => void | (() => void)) {
   document.addEventListener('astro:page-load', () => {
     const c = fn();
@@ -116,10 +135,21 @@ onPage(() => {
 async function copy(text: string, btn: HTMLElement, done = 'Copied ✓') {
   try {
     await navigator.clipboard.writeText(text);
-    const prev = btn.dataset.label ?? btn.textContent ?? '';
-    btn.dataset.label = prev;
     const target = btn.querySelector('[data-copy-label]') ?? btn;
+    const prev = btn.dataset.label ?? target.textContent ?? '';
+    btn.dataset.label = prev;
     target.textContent = done;
+    const copySource = btn.dataset.copySource
+      ? btn.dataset.copySource
+      : btn.classList.contains('copy-code')
+      ? 'code_block'
+      : btn.dataset.copyFrom === '#skill-raw'
+        ? 'skill_file'
+        : btn.closest('article')
+          ? 'article_link'
+          : 'install_command';
+    capture('content_copied', { copy_source: copySource });
+    logPostHog('content copied', { copy_source: copySource });
     setTimeout(() => (target.textContent = prev.trim()), 1600);
   } catch {
     /* clipboard unavailable — no-op */
@@ -150,6 +180,17 @@ onPage(() => {
   };
   document.addEventListener('click', onClick);
   return () => document.removeEventListener('click', onClick);
+});
+
+/* ---------- Newsletter ---------- */
+onPage(() => {
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-newsletter-form]');
+  const onSubmit = () => {
+    capture('newsletter_subscription_submitted');
+    logPostHog('newsletter submission started');
+  };
+  forms.forEach((form) => form.addEventListener('submit', onSubmit));
+  return () => forms.forEach((form) => form.removeEventListener('submit', onSubmit));
 });
 
 /* ---------- Mobile menu ---------- */

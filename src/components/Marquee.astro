@@ -4,7 +4,7 @@ const items = [
   'Jira is, unfortunately, alive', 'The PM is dead', 'Strategy decks are dead', 'Stand-ups should be dead',
 ];
 ---
-<div class="relative overflow-hidden border-y border-line bg-ink py-4 text-paper [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]" aria-label="Things the internet has declared dead">
+<div class="relative overflow-hidden border-y border-line bg-invert py-4 text-invert-ink [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]" aria-label="Things the internet has declared dead">
   <div class="flex w-max animate-marquee gap-10 hover:[animation-play-state:paused]">
     {[0, 1].map((dup) => (
       <ul class="flex shrink-0 gap-10" aria-hidden={dup === 1 ? 'true' : undefined}>

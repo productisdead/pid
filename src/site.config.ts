@@ -14,10 +14,15 @@ export const SITE = {
     email: 'productisdead@gmail.com',
   },
   locale: 'en-US',
+  /** Public source repo. Skills live at <url>/tree/<branch>/skills/<id>. */
+  repo: {
+    url: 'https://github.com/productisdead/pid',
+    branch: 'main',
+  },
   socials: {
     x: '',
     linkedin: '',
-    github: '',
+    github: 'https://github.com/productisdead/pid',
     youtube: '',
   },
   /**

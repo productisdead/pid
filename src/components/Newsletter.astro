@@ -17,7 +17,7 @@ const { action, fieldName } = SITE.newsletter;
         New essays and new skills, when they're ready. No growth hacks, no "10 prompts that will replace your PM". Unsubscribe whenever you like.
       </p>
       {action ? (
-        <form action={action} method="post" target="_blank" class="mt-7 flex max-w-md flex-col gap-2 sm:flex-row">
+        <form data-newsletter-form action={action} method="post" target="_blank" class="mt-7 flex max-w-md flex-col gap-2 sm:flex-row">
           <label class="sr-only" for={`nl-${compact ? 'c' : 'f'}`}>Email address</label>
           <input id={`nl-${compact ? 'c' : 'f'}`} name={fieldName} type="email" required placeholder="you@stillemployed.com" autocomplete="email" class="h-12 flex-1 rounded-full border-2 border-black/80 bg-white/80 px-5 text-base text-black outline-none placeholder:text-black/40 focus:bg-white" />
           <button class="btn h-12 bg-[#141112] px-6 text-[#F5F5F5] hover:shadow-[4px_4px_0_0_#fff] hover:-translate-x-0.5 hover:-translate-y-0.5">Subscribe</button>
